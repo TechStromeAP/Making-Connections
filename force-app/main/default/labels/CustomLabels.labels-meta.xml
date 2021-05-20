@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Additional_Comments</fullName>
+        <categories>Volunteer Registration</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Additional Comments</shortDescription>
+        <value>Any additional comments/questions?</value>
+    </labels>
+    <labels>
+        <fullName>BS_Reason_for_Referral</fullName>
+        <categories>Client Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BS Reason for Referral</shortDescription>
+        <value>Why is the support of Making Connections needed?</value>
+    </labels>
+    <labels>
+        <fullName>Befriending_and_Support_Referral_Source_Section</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Befriending and Support Referral Source Section</shortDescription>
+        <value>IMPORTANT NOTE: Making Connections may need to contact your client’s GP/other relevant health care
+professional about the referral and/or delivery of service. Information obtained will be treated as strictly
+confidential. Informed consent must be obtained from the Client.</value>
+    </labels>
+    <labels>
+        <fullName>Billing_Information_Section</fullName>
+        <categories>Client Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Billing Information Section</shortDescription>
+        <value>Billing Options (Monthly Payment)</value>
+    </labels>
+    <labels>
+        <fullName>Client_Form_View_Only_Step1</fullName>
+        <categories>Client Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Client Form View Only Step1</shortDescription>
+        <value>Making Connections has contact details for this client on file. If NOK/ alternative contact person has changed, please give details in the comments section at the end of the form.</value>
+    </labels>
+    <labels>
+        <fullName>Data_Protection_Consent</fullName>
+        <categories>Volunteer Registration</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Data Protection Consent</shortDescription>
+        <value>In accordance with the Data Protection Acts/GDPR, I agree that Making Connections may hold and use personal information about me for volunteering reasons and to keep in touch with me. This information, including that contained in this form can be stored on both manual and/or computer files. It will be held securely and only accessed by authorised persons.</value>
+    </labels>
+    <labels>
+        <fullName>Delivery_Availability_Section</fullName>
+        <categories>Volunteer Registration</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delivery Availability Section</shortDescription>
+        <value>Good Food Delivered operates on Monday, Wednesday and Friday afternoon. Pick-up is at Airfield Estate, Dundrum at 12.30pm and deliveries are complete by c.a. 2pm.</value>
+    </labels>
+    <labels>
+        <fullName>GFD_Referral_form_Section_Text_1</fullName>
+        <categories>Client Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GFD Referral form Section Text 1</shortDescription>
+        <value>Before making a referral for Good Food Delivered please;
+1. read the Referral Information Leaflet and,
+2. provide the Client Information Leaflet to the client/nok.</value>
+    </labels>
+    <labels>
+        <fullName>GFD_Referral_form_Section_Text_2</fullName>
+        <categories>Client Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>GFD_Referral_form_Section_Text_2</shortDescription>
+        <value>Meals are provided by Airfield Estate and delivered by Making Connections Volunteers in partnership with the HSE. Meal delivery options are Mon (1-2 meals), Wed (1-2 meals) and Fri (1-3 meals). Client contribution is €3 per meal paid monthly by bank card (over the phone) or cheque. Clients need to be able to refrigerate and re-heat meals. Allergens and medically prescribed diet can be accommodated – other preferences are not guaranteed.</value>
+    </labels>
+    <labels>
+        <fullName>Hobbies_and_Interest</fullName>
+        <categories>Expression of Interest</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Hobbies and Interest</shortDescription>
+        <value>What are your hobbies/Interests?</value>
+    </labels>
+    <labels>
+        <fullName>In_Case_Emergency_Section</fullName>
+        <categories>Volunteer Registration</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>In Case Emergency Section</shortDescription>
+        <value>GUIDELINES: References should be over 18 and not related to you. They can be former/current colleagues, employers or anyone (e.g. committee, club colleagues) who would be able to comment on your suitability for a volunteer role with Making Connections. Where possible references should be people who you reported to directly (e.g. manager, club leader, etc).</value>
+    </labels>
+    <labels>
+        <fullName>MakingConnectionBaseURL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MakingConnectionBaseURL</shortDescription>
+        <value>https://devmc-makingconnectionsdevsb.cs105.force.com</value>
+    </labels>
+    <labels>
+        <fullName>Name_Location_of_work_place</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Name/Location of work place</shortDescription>
+        <value>Name and location of company/organisation (employer)</value>
+    </labels>
+    <labels>
+        <fullName>Questions_and_Comments</fullName>
+        <categories>Expression of Interest</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Questions and Comments</shortDescription>
+        <value>Any other comments/questions?</value>
+    </labels>
+    <labels>
+        <fullName>Skills_text</fullName>
+        <categories>Expression of Interest</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Skills text</shortDescription>
+        <value>What skills can you share?</value>
+    </labels>
+    <labels>
+        <fullName>Subjective_to_Review</fullName>
+        <categories>Client Form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Subjective to Review</shortDescription>
+        <value>Please note: Referral Information is retained by Making Connections. Each referral is subject to review.</value>
+    </labels>
+    <labels>
+        <fullName>Volunteer_Availability_Section</fullName>
+        <categories>Volunteer Registration</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Volunteer Availability Section</shortDescription>
+        <value>Befriending &amp;amp; Supports Volunteering may vary due to changing needs during the Covid-19 crisis.</value>
+    </labels>
+</CustomLabels>

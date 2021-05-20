@@ -1,0 +1,119 @@
+<aura:component access="global" controller="RegistrationFormController">
+    <aura:attribute name="sourceOfMakingConnections" type="List" default="[]" />
+    <aura:attribute name="communicationMethods" type="List" default="[]" />
+    <aura:attribute name="nameFields" type="List" default="['firstName', 'lastName']" />
+    <aura:attribute name="agreeDataProtection" type="Boolean" default="false" />
+    <aura:attribute name="agreeMarketingConsent" type="Boolean" default="false" />
+    <aura:attribute name="objInfo" type="Contact" default="{sobjectType : 'Contact'}" />
+    <aura:attribute name="volunteer" type="Contact" />
+    <aura:attribute name="questionsCommentsLabel" type="String" />
+    <aura:attribute name="otherDetails" type="Boolean" default="false" />
+    <aura:attribute name="selectedCommunicationMethod" type="List" />
+    <aura:attribute name="selectedVolunteerTypes" type="List" />
+
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:registerEvent name="PreviousVolunteerRegistrationFormStep3" type="c:PreviousVolunteerRegistrationFormStep3" />
+
+    <div class="slds-card">
+        <lightning:progressBar value="80" size="large" />
+        <div class="c-container" style="width: 80%; padding-left : 20%;">
+            <lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand"
+                size="large" class="slds-hide" />
+
+            <div class="slds-page-header slds-page-header_record-home backgroundColor ">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-opportunity">
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate"
+                                                title="Additional Information">ADDITIONAL INFORMATION</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <lightning:layout horizontalAlign="space">
+                <lightning:layoutItem size="12">
+                    <lightning:textarea aura:id="volunteerRegistrationForm" name="forseeableComments"
+                        label="Anything forseeable to interrupt weekly volunteering in the coming 6-12 months (other than usual holiday periods)?"
+                        value="{!v.volunteer.Anything_to_interrupt_volunteering__c}" type="text" required="true" />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout horizontalAlign="space">
+                <lightning:layoutItem size="12">
+                    <lightning:textarea aura:id="volunteerRegistrationForm" name="forseeableComments"
+                        label="{!v.questionsCommentsLabel}" value="{!v.volunteer.Additional_Comments__c}" type="text"
+                        required="true" />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout horizontalAlign="spread">
+                <lightning:layoutItem size="6">
+                    <lightning:combobox aura:id="volunteerRegistrationForm" name="sourceMakingConnections"
+                        label="How did you hear about Making Connections?" options="{! v.sourceOfMakingConnections }"
+                        value="{!v.volunteer.How_did_you_hear_about_MC__c}" required="true" />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Data Protection ans Consent">Data
+                        Protection &amp; Consent</span>
+                </h3>
+                <p>
+                    <b>
+                        {!$Label.c.Data_Protection_Consent}
+                    </b>
+                </p>
+                <br></br>
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutItem size="12">
+                        <lightning:input type="checkbox"
+                            label="I have read, understood and agree to the Data Protection statement"
+                            name="dataProtect" checked="{!v.volunteer.Agree_to_Data_protection_statement__c}"
+                            required="true" aura:id="volunteerRegistrationForm" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                &nbsp;
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutItem size="12">
+                        <lightning:input type="checkbox"
+                            label="I consent to be contacted by Making Connections about matters relevant to this registration"
+                            name="marketingConsent" checked="{!v.volunteer.Consent_to_be_contacted__c}" required="true"
+                            aura:id="volunteerRegistrationForm" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <br></br>
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerRegistrationForm" name="dateOfConcent"
+                            label="Date of consent given" value="{!v.volunteer.Date_of_consent_given__c}" type="Date"
+                            required="true" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_5-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleBackClickStep3}" label="Back" variant="neutral" />
+            </span>
+        </div>
+        <div class="slds-col slds-size_7-of-12">
+            <span style="margin-left : 200px;">
+                <lightning:button onclick="{!c.handleSubmitForm}" label="Submit Form" variant="brand"
+                    aura:id="submitButton" />
+            </span>
+        </div>
+    </div>
+</aura:component>

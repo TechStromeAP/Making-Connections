@@ -1,0 +1,19 @@
+.THIS .backgroundColor{
+    background-color : #DDDBDA;
+}
+
+.THIS .slds-progress-bar__value{
+    background: #334d91;
+}
+
+.THIS .slds-button_brand{
+    background-color : #334d91;
+}
+
+.THIS .slds-scope .slds-button_neutral .slds-scope .slds-button--neutral{
+    color : #334d91;
+}
+
+.THIS .slds-form-element__label{
+    font-size : 15px;
+}

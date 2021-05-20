@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Selection__c</fullName>
+    <externalId>false</externalId>
+    <label>Service Selection</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Befriending &amp; Supports Visits</fullName>
+                <default>false</default>
+                <label>Befriending &amp; Supports Visits</label>
+            </value>
+            <value>
+                <fullName>Telephone Befriending Calls</fullName>
+                <default>false</default>
+                <label>Telephone Befriending Calls</label>
+            </value>
+            <value>
+                <fullName>Covid-19 Emergency Supports</fullName>
+                <default>false</default>
+                <label>Covid-19 Emergency Supports</label>
+            </value>
+            <value>
+                <fullName>Cultural Connections</fullName>
+                <default>false</default>
+                <label>Cultural Connections</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

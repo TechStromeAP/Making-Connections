@@ -1,0 +1,117 @@
+<aura:component controller="ReferringAgentRegistrationFormController">
+    <aura:attribute name="step" type="String"/>
+    <aura:attribute name="nameFields" type="List" default="['firstName', 'lastName']"/>
+    <aura:attribute name="referringAgent" type="Contact" default="{ 'sobjectType': 'Contact',
+        'FirstName': '',
+        'LastName': '',
+        'Email': '',
+        'Phone': '',
+        'MobilePhone' : '',
+        }"  />
+    <aura:attribute name="occupationOptions" type="List"/>
+	<aura:attribute name="objInfo" type="Contact" default="{sobjectType : 'Contact'}" />
+	<aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <aura:attribute name="otherOccupation" type="Boolean" />
+	<aura:attribute name="confirmEmail" type="String"/>
+
+    <div class="slds-card">
+        <header class="slds-modal__header" >
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-12">
+                    <img src="{!$Resource.MakingConnectionLogo}" style="max-width : 250%;"/> 
+                </div>
+                <div class="slds-col slds-size_10-of-12">
+                    <br></br>
+                    <h1 style="font-size: 2rem;">
+                        Referral Agent Registration
+                    </h1>
+                </div>
+            </div>
+        </header>
+        <lightning:progressBar value="0" size="large" />
+        <div class="c-container" style="width: 80%; padding-left : 20%;">
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Personal Details">Personal Details</span>
+                </h3>
+                <lightning:inputName aura:id = "referringAgentForm" 
+                    firstName="{!v.referringAgent.FirstName}"
+                    lastName="{!v.referringAgent.LastName}"
+                    label="Referrer Name"
+                    required="true"
+                    variant="label-inline"
+                    fieldsToDisplay="{!v.nameFields}"/>
+               <lightning:layout horizontalAlign="space">
+                	<lightning:layoutItem size="6">
+                    	<lightning:combobox aura:id = "referringAgentForm"
+                                name="occupation" 
+                                label="Occupation" 
+                                options="{!v.occupationOptions}"
+                                value="{!v.referringAgent.Occupation1__c}"
+                                onchange="{!c.handleOccupationChange}"
+                                required="true"/>
+                    </lightning:layoutItem>
+                    &nbsp;
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id = "referringAgentForm"
+                                name="proffTitle"
+                                label="Professional Title"
+                                value="{!v.referringAgent.Professional_Title__c}"
+                                required="true"
+                                type="text"/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout horizontalAlign="space">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id = "referringAgentForm"
+                            name="mobile"
+                            label="Telephone (Mobile)"
+                            value="{!v.referringAgent.MobilePhone}"
+                            required="true"
+                            type="tel"/>
+                    </lightning:layoutItem>
+                    &nbsp;
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id = "referringAgentForm"
+                            name="landline"
+                            label="Telephone (Landline)"
+                            value="{!v.referringAgent.Phone}"
+                            type="tel"/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout  horizontalAlign="spread">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id = "referringAgentForm"
+                            type="email" 
+                            label="Email (you will use this to access your account)"
+                            name="email" 
+                            required="true"
+                            value="{!v.referringAgent.Email}"/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+				<lightning:layout  horizontalAlign="spread">
+                    <lightning:layoutItem size="6">
+                        <lightning:input
+                            type="email" 
+                            label="Confirm Email"
+                            name="email" 
+                            required="true"
+                            value="{!v.confirmEmail}"/>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;" >
+        <div class="slds-col slds-size_8-of-12">
+            <span></span>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleSubmitForm}" label="Submit form" variant="brand" aura:id="submitButton"/>
+				<lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand" size="large" class="slds-hide"/>
+            </span>
+        </div>
+    </div>
+</aura:component>

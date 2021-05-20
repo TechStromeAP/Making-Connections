@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>When the volunteers fill the form, an email is sent to them as acknowledgement for registering</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Expression of Interest to Volunteer</name>
+    <style>none</style>
+    <subject>Thank you for your interest in Making Connections</subject>
+    <textOnly>Dear {!Lead.Name}
+
+
+Thank you for your interest in Making Connections. We have saved your expression of interest form and will be in touch as soon as a relevant opportunity becomes available.
+
+
+In the meanwhile feel free to read our latest news here; https://makingconnections.ie/news-events/
+
+
+If you have any questions in the meantime, please don’t hesitate to get in touch.
+
+
+Kind Regards
+
+Rachel
+
+-----------------------------------------------------------------------------------------------------
+
+Making Connections COVID-19 Response: Befriending and Supports for older people
+
+Phone:       +353 1 295 1053
+
+Website: www.makingconnections.ie
+
+Facebook: http://facebook.com/makingconnections.ie
+
+Twitter: http://twitter.com/connections_ie
+
+
+Making Connections
+
+Glenard, 36 Roebuck Clonskeagh Dublin 14
+
+
+Making Connections is a registered Charity CHY 21301</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HSE_eLand_Certification__c</fullName>
+    <externalId>false</externalId>
+    <label>HSE eLand Certification</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Invited sent</fullName>
+                <default>false</default>
+                <label>Invited sent</label>
+            </value>
+            <value>
+                <fullName>Training Completed</fullName>
+                <default>false</default>
+                <label>Training Completed</label>
+            </value>
+            <value>
+                <fullName>N.A.</fullName>
+                <default>false</default>
+                <label>N.A.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

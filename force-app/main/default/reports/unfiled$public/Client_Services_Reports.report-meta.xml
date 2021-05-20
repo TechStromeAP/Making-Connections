@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Client_Service__c$Name</field>
+    </columns>
+    <columns>
+        <field>Client_Service__c$Client__c</field>
+    </columns>
+    <columns>
+        <field>Client_Service__c$Start_Date__c</field>
+    </columns>
+    <columns>
+        <field>Client_Service__c$End_Date__c</field>
+    </columns>
+    <columns>
+        <field>Client_Service__c$Support_Provided__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Client_Service__c$Support_Provided__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>,Befriending Visits,Befriending Calls,Good Food Delivered,Hospital discharge support,Covid-19 Shopping,Covid-19 Pension,Support to Exercise,Book Drop/ Library,Digital literacy,Events: live/ online,Events: neighbourhood,Home (family volunteering),Link to: external services</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Client Services Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Client_Services_Report__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Client_Service__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFD_Client_informed_service_is_temporary__c</fullName>
+    <description>This is for GFD to know if Client/nok informed service is temporary</description>
+    <externalId>false</externalId>
+    <label>Client/NOK informed service is temporary</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No</valueSetName>
+    </valueSet>
+</CustomField>

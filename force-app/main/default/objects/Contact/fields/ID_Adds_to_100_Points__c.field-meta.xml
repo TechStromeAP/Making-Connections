@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ID_Adds_to_100_Points__c</fullName>
+    <externalId>false</externalId>
+    <label>ID Adds to 100 Points?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>n.a. not received</fullName>
+                <default>false</default>
+                <label>n.a. not received</label>
+            </value>
+            <value>
+                <fullName>No - followup pending</fullName>
+                <default>false</default>
+                <label>No - followup pending</label>
+            </value>
+            <value>
+                <fullName>No - followup sent</fullName>
+                <default>false</default>
+                <label>No - followup sent</label>
+            </value>
+            <value>
+                <fullName>Yes - 100 points confirmed</fullName>
+                <default>false</default>
+                <label>Yes - 100 points confirmed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

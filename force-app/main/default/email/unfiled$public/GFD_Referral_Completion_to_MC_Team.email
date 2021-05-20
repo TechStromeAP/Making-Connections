@@ -1,0 +1,8 @@
+New GFD Referral Form Received: 
+
+Service: Good Food Delivered
+Name: {!Account.Name}
+Referred by: {!Account.GFD_Source_of_referral__c}
+Date: {!Account.GFD_Date__c}
+
+Click here to view this client’s information:  {!Account.Link}

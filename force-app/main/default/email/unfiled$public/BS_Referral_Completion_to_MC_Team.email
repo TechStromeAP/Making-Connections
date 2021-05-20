@@ -1,0 +1,7 @@
+New B&S Referral Form Received:
+Service: Befriending & Supports
+Name: {!Account.Name}
+Referred by: {!Account.BS_Source_of_referral__c}
+Date: {!Account.B_S_Referral_Source_Date__c}
+
+Click here to view this client’s information:  {!Account.Link}

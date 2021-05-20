@@ -1,0 +1,128 @@
+<aura:component controller="ClientRegistrationController">
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="client" type="Account" />
+    <aura:attribute name="objInfo" type="Account" default="{sobjectType : 'Account'}" />
+    <aura:registerEvent name="nextInStep1ClientFormViewOnly" type="c:NextInStep1ClientFormViewOnly" />
+    <div class="slds-scrollable">
+        <div class="slds-card">
+            <lightning:progressBar value="0" size="large" />
+            <lightning:recordViewForm recordId="{!v.client.Id}" objectApiName="Account">
+                <div class="c-container" style="width: 80%; padding-left : 20%;">
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                            <span class="slds-truncate slds-p-horizontal_small" title="Client Details">Client
+                                Details</span>
+                        </h3>
+                        <lightning:layout horizontalAlign="space">
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Client Name</label>
+                                <lightning:outputField fieldName="Client_Name__c" variant="label-hidden" />
+                            </lightning:layoutItem>
+                            &nbsp;
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Client Surname</label>
+                                <lightning:outputField fieldName="Client_Surname__c" variant="label-hidden" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <lightning:layout horizontalAlign="spread">
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Date of Birth</label>
+                                <lightning:outputField fieldName="D_O_B__c" variant="label-hidden" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <lightning:layout horizontalAlign="space">
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Client's Public Health
+                                    Nurse</label>
+                                <lightning:outputField fieldName="Client_s_Public_Health_Nurse__c"
+                                    variant="label-hidden" />
+                            </lightning:layoutItem>
+                            &nbsp;
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Client's Health Centre
+                                    name and location</label>
+                                <lightning:outputField fieldName="Client_s_Health_Centre_name_and_location__c"
+                                    variant="label-hidden" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                        <lightning:layout horizontalAlign="space">
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Befriending and Support
+                                    Form Completed</label>
+                                <lightning:outputField fieldName="Is_BS_section_updated__c" variant="label-hidden" />
+                            </lightning:layoutItem>
+                            &nbsp;
+                            <lightning:layoutItem size="6">
+                                <label class="slds-form-element__label" for="unique-id-of-input">Good Food Delivered
+                                    Form Completed</label>
+                                <lightning:outputField fieldName="Is_GFD_section_updated__c" variant="label-hidden" />
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                    <div class="slds-section slds-is-open">
+                        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                            <span class="slds-truncate slds-p-horizontal_small"
+                                title="Alternative Contact Person">Alternative Contact Person</span>
+                        </h3>
+                        <br></br>
+                        <lightning:card title="Next of Kin (or other suitable contact) 1" iconName="utility:user"
+                            variant="base" class="slds-card_boundary">
+                            <div class="slds-card__body_inner">
+                                <div class="slds-form slds-form_stacked">
+                                    <lightning:layout horizontalAlign="space">
+                                        <lightning:layoutItem size="6">
+                                            <label class="slds-form-element__label" for="unique-id-of-input">First
+                                                Name</label>
+                                            <lightning:outputField fieldName="Client_Contact_Person_1_First_Name__c"
+                                                variant="label-hidden" />
+                                        </lightning:layoutItem>
+                                        &nbsp;
+                                        <lightning:layoutItem size="6">
+                                            <label class="slds-form-element__label"
+                                                for="unique-id-of-input">Surname</label>
+                                            <lightning:outputField fieldName="Client_Contact_Person_1_Surname__c"
+                                                variant="label-hidden" />
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                    <lightning:layout horizontalAlign="space">
+                                        <lightning:layoutItem size="6">
+                                            <label class="slds-form-element__label"
+                                                for="unique-id-of-input">Relationship to Client (older person)</label>
+                                            <lightning:outputField fieldName="Relationship_to_applicant__c"
+                                                variant="label-hidden" />
+                                        </lightning:layoutItem>
+                                        &nbsp;
+                                        <lightning:layoutItem size="6">
+                                            <label class="slds-form-element__label" for="unique-id-of-input">Location
+                                                (County/ Country)</label>
+                                            <lightning:outputField fieldName="Location_County_Country__c"
+                                                variant="label-hidden" />
+                                        </lightning:layoutItem>
+                                    </lightning:layout>
+                                </div>
+                            </div>
+                        </lightning:card>
+                        <br></br>
+                        <p>
+                            <b>
+                                {!$Label.c.Client_Form_View_Only_Step1}
+                            </b>
+                        </p>
+                    </div>
+                </div>
+            </lightning:recordViewForm>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_8-of-12">
+            <span></span>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleNextClick}" label="Next" variant="brand" />
+            </span>
+        </div>
+    </div>
+    <br></br>
+</aura:component>

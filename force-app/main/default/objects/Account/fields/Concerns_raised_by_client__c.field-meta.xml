@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Concerns_raised_by_client__c</fullName>
+    <description>This field is for MC to check if concerns/ queries raised by client.</description>
+    <externalId>false</externalId>
+    <label>Concerns raised by client?</label>
+    <length>255</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFD_Meals_Start_Date__c</fullName>
+    <description>This field is for GFD to capture MEALS START DATE</description>
+    <externalId>false</externalId>
+    <label>Meals Start Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>

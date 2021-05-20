@@ -1,0 +1,53 @@
+.THIS .slds_badge{
+    padding : .25rem .5rem;
+}
+
+.THIS .customRadioCls .slds-form-element__control .slds-radio{
+    display : inline-block !important;
+    	font-size : 15px;
+}
+
+.THIS .step3{
+    margin-left : .3%;
+}
+
+.THIS .regDetails {
+    padding-left : 1.5%;
+}
+
+.THIS .slds-button_brand{
+    background-color : #334d91;
+}
+
+.THIS .slds-form-element__label{
+    font-size : 15px;
+}
+
+
+.THIS .slds-scope h1{
+    font-size : 1.2em;
+}
+
+.THIS .slds-form-element__static{
+	font-size : 15px;
+}
+
+.THIS .questionsClass{
+	font-size : 15px;
+}
+
+.THIS .slds-scope .slds-radio .slds-form-element__label{
+	font-size : 15px;
+}
+
+.THIS .slds-icon-action-approval{
+    background-color : green;
+}
+
+.THIS .slds-icon-action-close{
+    background-color : red;
+}
+
+.THIS .slds-scope .slds-radio .slds-radio_faux{
+	background-color : #334d91;
+}

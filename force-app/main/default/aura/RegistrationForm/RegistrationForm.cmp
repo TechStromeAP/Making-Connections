@@ -1,0 +1,464 @@
+<aura:component access="global" controller="RegistrationFormController">
+    <aura:attribute name="volunteerTypes" type="List" default="[
+        {'label': 'Volunteer Registration', 'value': 'Volunteer'},
+        {'label': 'Make a Referral', 'value': 'ReferringAgentforClient'}
+        ]" />
+    <aura:attribute name="registrationCompleted" type="List" default="[
+        {'label': 'Yes', 'value': 'Yes'},
+        {'label': 'No', 'value': 'No'}
+        ]" />
+    <aura:attribute name="volunteer" type="Contact" default="{ 'sobjectType': 'Contact',
+        'FirstName': '',
+        'LastName': '',
+        'Email': '',
+        }" />
+
+    <aura:attribute name="displayBefriendingAndSupport" type="Boolean" />
+    <aura:attribute name="volunteerType" type="String" />
+    <aura:attribute name="clientDob" type="Date" />
+    <aura:attribute name="clientFormViewMode" type="Boolean" />
+    <aura:attribute name="clientDetails" type="Account" default="{ 'sobjectType': 'Account'}" />
+    <aura:attribute name="selectedInterests" type="List" />
+    <aura:attribute name="selectedTransportations" type="List" />
+    <aura:attribute name="displayGoodFoodDelivered" type="Boolean" />
+    <aura:attribute name="selectedVolunteerTypes" type="List" />
+    <aura:attribute name="recordIdToUpdate" type="String" />
+    <aura:attribute name="selectedStep" type="String" />
+    <aura:attribute name="selectedStepClient" type="String" />
+    <aura:attribute name="selectedVolunteerType" type="String" />
+    <aura:attribute name="email" type="String" />
+    <aura:attribute name="clientLastName" type="String" />
+    <aura:attribute name="volunteerDetails" type="Contact" />
+    <aura:attribute name="isRegistred" type="Boolean" default="false" />
+    <aura:attribute name="isClientRegistred" type="Boolean" />
+    <aura:attribute name="bothSectionsCompleted" type="Boolean" />
+    <aura:attribute name="isNotRegistered" type="Boolean" default="false" />
+    <aura:attribute name="registrationType" type="String" />
+    <aura:attribute name="selectedAfternoonDays" type="List" />
+    <aura:attribute name="selectedEveningDays" type="List" />
+    <aura:attribute name="selectedMorningDays" type="List" />
+    <aura:handler name="PreviousVolunteerRegistrationFormInStep2" event="c:PreviousVolunteerRegistrationFormInStep2"
+        action="{!c.handlePreviousStep2}" />
+    <aura:handler name="PreviousVolunteerRegistrationFormStep3" event="c:PreviousVolunteerRegistrationFormStep3"
+        action="{!c.handlePreviousStep3}" />
+    <aura:handler name="nextInStep1VolunteerReg" event="c:NextInStep1VolunteerReg" action="{!c.handleNextInStep1}" />
+    <aura:handler name="NextInStep2VolunteerReg" event="c:NextInStep2VolunteerReg" action="{!c.handleNextInStep2}" />
+    <aura:handler name="nextInStep1ClientForm" event="c:NextInStep1ClientForm"
+        action="{!c.handleNextInStep1ClientReg}" />
+    <aura:handler name="nextInStep1ClientFormViewOnly" event="c:NextInStep1ClientFormViewOnly"
+        action="{!c.handleNextInStep1ClientRegViewOnly}" />
+    <aura:handler name="previousInStep2ClientForm" event="c:PreviousInStep2ClientForm"
+        action="{!c.handlePreviousInStep2ClientReg}" />
+    <aura:handler name="previousInStep2ClientFormViewOnly" event="c:PreviousInStep2ClientFormViewOnly"
+        action="{!c.handlePreviousInStep2ClientRegViewOnly}" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="baseUrl" type="String" />
+    <aura:attribute name="referringAgentFormUrl" type="String" />
+
+    <div class="slds-card">
+        <header class="slds-modal__header">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-12">
+                    <img src="{!$Resource.MakingConnectionLogo}" style="max-width : 250%;" />
+                </div>
+                <div class="slds-col slds-size_10-of-12">
+                    <br></br>
+                    <h1 style="font-size: 2rem;">
+                        Making Connections Portal
+                    </h1>
+                </div>
+            </div>
+        </header>
+    </div>
+    <br></br>
+    <lightning:layout horizontalAlign="space">
+        <lightning:layoutItem padding="around-small" class="slds-badge">
+            <h1>1</h1>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="3">
+            <h1 class="questionsClass">What would you like do?</h1>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="6">
+            <lightning:radioGroup aura:id="registType" name="registType" label="" options="{! v.volunteerTypes }"
+                value="{! v.registrationType }" type="radio" class="customRadioCls"
+                onchange="{! c.handleVolunteerTypeChange }" />
+        </lightning:layoutItem>
+    </lightning:layout>
+    <br></br>
+    <aura:if isTrue="{!not(empty(v.selectedVolunteerType))}">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-small" class="slds-badge">
+                <h1>2</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3">
+                <h1 class="questionsClass">Have you used the Making Connections Portal before?</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <lightning:radioGroup aura:id="registeredBefore" name="registeredBefore" label=""
+                    options="{! v.registrationCompleted }" value="{! v.value }" type="radio" class="customRadioCls"
+                    onchange="{! c.handleRegistrationChange }" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:if>
+    <br></br>
+    <aura:if isTrue="{!v.isRegistred}">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-small" class="slds-badge">
+                <h1>3</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3">
+                <h1 class="questionsClass">Please enter your Email to access your account</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="2">
+                <lightning:input aura:id="emailInput" name="inline-search-input" label="Email Id to Authorize"
+                    type="email" value="{!v.email}" required="true" variant="label-hidden" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="3">
+                <lightning:button variant="brand" label="Verify Email" title="VerifyEmail"
+                    onclick="{! c.handleVerifyEmail }" aura:id="verifyButton" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:if>
+    <aura:if isTrue="{!and(v.registrationType == 'Volunteer', v.isNotRegistered)}">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="4">
+                To get started, please complete the <a href="{!v.baseUrl}" target="_blank">Volunteer Expression of
+                    Interest Form</a>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:if>
+    <aura:if isTrue="{!and( v.registrationType == 'ReferringAgentforClient', v.isNotRegistered) }">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="4">
+                To get started, please complete the <a href="{!v.referringAgentFormUrl}" target="_blank">Referring Agent
+                    Form</a>.
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:if>
+    <br></br>
+    <aura:if
+        isTrue="{!and(not(empty(v.volunteerDetails)),v.registrationType == 'Volunteer', not(v.volunteerDetails.Registration_Form_submitted__c))}">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-small" class="slds-badge step3">
+                <h1>4</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="10" class="regDetails">
+                <h1 class="questionsClass">We have found your details. Please continue.
+                    <lightning:icon iconName="utility:info" alternativeText="Audio file" title="Audio" /> If these
+                    details have changed or are incorrect, please email us at <a>info@makingconnections.ie</a>
+                </h1>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <div class="c-container">
+            <lightning:recordViewForm recordId="{!v.volunteerDetails.Id}" objectApiName="Contact">
+                <div class="slds-card" style="width: 80%; margin-left : 15%;">
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Name</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="Name" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Date of Birth</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="DOB__c" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Telephone (Mobile)</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="Phone" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Telephone (Landline)</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="HomePhone" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Email</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="Email" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Address</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="MailingAddress" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Occupation</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="Occupation__c " />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <label class="slds-form-element__label" for="form-element-01">Name &amp; Location of
+                                Company</label>
+                            <div class="custom-box">
+                                <lightning:outputField fieldName="Name_and_location_of_company__c"
+                                    variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            </lightning:recordViewForm>
+        </div>
+        <br></br>
+    </aura:if>
+    <aura:if isTrue="{!and(not(empty(v.volunteerDetails)), v.registrationType == 'ReferringAgentforClient')}">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-small" class="slds-badge step3">
+                <h1>4</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="10" class="regDetails">
+                <h1 class="questionsClass">Please find your Referral Agent account details below.
+                    <lightning:icon iconName="utility:info" alternativeText="Audio file" title="Audio" /> If these
+                    details have changed or are incorrect, please email us at <a>info@makingconnections.ie</a>
+                </h1>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <div class="c-container">
+            <lightning:recordViewForm recordId="{!v.volunteerDetails.Id}" objectApiName="Contact">
+                <div class="slds-card" style="width: 80%; margin-left : 15%;">
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <div class="custom-box">
+                                <label class="slds-form-element__label" for="form-element-01">Referring Agent
+                                    Name</label>
+                                <lightning:outputField fieldName="Name" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <div class="custom-box">
+                                <label class="slds-form-element__label" for="form-element-01">Occupation</label>
+                                <lightning:outputField fieldName="Occupation1__c" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <div class="custom-box">
+                                <label class="slds-form-element__label" for="form-element-01">Professional Title</label>
+                                <lightning:outputField fieldName="Professional_Title__c" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <div class="custom-box">
+                                <label class="slds-form-element__label" for="form-element-01">Telephone (Mobile)</label>
+                                <lightning:outputField fieldName="MobilePhone" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" horizontalAlign="space">
+                        <lightning:layoutItem padding="around-small">
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                            <div class="custom-box">
+                                <label class="slds-form-element__label" for="form-element-01">Telephone
+                                    (Landline)</label>
+                                <lightning:outputField fieldName="Phone" variant="label-hidden" />
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem size="5" padding="around-small">
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            </lightning:recordViewForm>
+        </div>
+        <br></br>
+    </aura:if>
+    <aura:if isTrue="{!and(v.registrationType == 'Volunteer', v.volunteerDetails.Registration_Form_submitted__c)}">
+        <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+            <span class="slds-assistive-text">warning</span>
+            <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small"
+                title="Description of icon when needed">
+                <lightning:icon iconName="utility:warning" aria-hidden="true" />
+            </span>
+
+            <h2>Please &nbsp;<a href="https://makingconnections.ie/contact/" target="_blank"> Contact us</a>&nbsp; to
+                update your details.
+            </h2>
+        </div>
+        <aura:set attribute="else">
+            <aura:if isTrue="{!v.selectedStep == 'step1'}">
+                <div>
+                    <c:VolunteerRegistrationStep1 volunteer="{!v.volunteer}"
+                        selectedAfternoonDays="{!v.selectedAfternoonDays}"
+                        selectedEveningDays="{!v.selectedEveningDays}" selectedMorningDays="{!v.selectedMorningDays}" />
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.selectedStep == 'step2'}">
+                <div>
+                    <c:VolunteerRegistrationStep2 volunteer="{!v.volunteer}"
+                        selectedVolunteerTypes="{!v.selectedVolunteerTypes}"
+                        displayGoodFoodDelivered="{!v.displayGoodFoodDelivered}"
+                        displayBefriendingAndSupport="{!v.displayBefriendingAndSupport}"
+                        selectedInterests="{!v.selectedInterests}"
+                        selectedTransportations="{!v.selectedTransportations}"
+                        selectedAfternoonDays="{!v.selectedAfternoonDays}"
+                        selectedEveningDays="{!v.selectedEveningDays}" selectedMorningDays="{!v.selectedMorningDays}">
+                    </c:VolunteerRegistrationStep2>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.selectedStep == 'step3'}">
+                <div>
+                    <c:VolunteerRegistrationStep3 volunteer="{!v.volunteer}" selectedVolunteerTypes="{!v.selectedVolunteerTypes}"></c:VolunteerRegistrationStep3>
+                </div>
+            </aura:if>
+        </aura:set>
+    </aura:if>
+    <aura:if isTrue="{!and(v.registrationType == 'ReferringAgentforClient', not(empty(v.volunteerDetails)))}">
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem padding="around-small" class="slds-badge">
+                <h1>5</h1>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="10">
+                <h1 class="questionsClass">Please enter Client Last Name &amp; Client D.O.B (MM/DD/YYYY) to check for
+                    existing details</h1>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="center">
+            <lightning:layoutItem padding="around-small" size="2">
+                <lightning:input aura:id="clientLastNameInput" name="inline-search-input" label="LastName to Authorize"
+                    type="text" value="{!v.clientLastName}" required="true" variant="label-hidden"
+                    placeholder="Client Last Name" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="2">
+                <lightning:input type="date" name="clientDob" label="Client DOB" required="true" value="{!v.clientDob}"
+                    variant="label-hidden" placeholder="DOB(mm/dd/yyyy)" />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="4">
+                <lightning:button variant="brand" label="Find Client Details" title="findClientDetails"
+                    onclick="{! c.handleClientVerifyEmail }" aura:id="findClientDetailButton" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </aura:if>
+    <br></br>
+
+    <aura:if isTrue="{!or(v.isClientRegistred, v.clientFormViewMode)}">
+        <div class="slds-grid slds-wrap" style="padding-left: 20%;">
+            <div class="slds-col" style="width : 2px;">
+                Befriending and Support Form Completed :
+            </div>
+            <div class="slds-col" style="padding-right: 50%;">
+                <aura:if isTrue="{!v.clientDetails.Is_BS_section_updated__c}">
+                    <lightning:icon iconName="action:approval" variant="bare" size="xx-small" />
+                    <aura:set attribute="else">
+                        <lightning:icon iconName="action:close" variant="bare" size="xx-small" />
+                    </aura:set>
+                </aura:if>
+            </div>
+        </div>
+        <br></br>
+        <div class="slds-grid slds-wrap" style="padding-left: 20%;">
+            <div class="slds-col" style="width : 2px;">
+                Good Food Delivered Form Completed :
+            </div>
+            <div class="slds-col" style="padding-right: 50%;">
+                <aura:if isTrue="{!v.clientDetails.Is_GFD_section_updated__c}">
+                    <lightning:icon iconName="action:approval" variant="bare" size="xx-small" />
+                    <aura:set attribute="else">
+                        <lightning:icon iconName="action:close" variant="bare" size="xx-small" />
+                    </aura:set>
+                </aura:if>
+            </div>
+        </div>
+    </aura:if>
+
+    <br></br>
+    <aura:if isTrue="{!v.isClientRegistred}">
+        <aura:if isTrue="{!v.selectedStepClient == 'step1'}">
+            <div>
+                <c:ClientRegistrationStep1 client="{!v.clientDetails}" volunteerType="{!v.volunteerType}"
+                    clientEmail="{!v.clientEmail}" />
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.selectedStepClient == 'step2'}">
+            <div>
+                <c:ClientRegistrationStep2 client="{!v.clientDetails}" referringAgentEmail="{!v.email}"
+                    volunteerType="{!v.volunteerType}" displayGoodFoodDelivered="{!v.displayGoodFoodDelivered}"
+                    displayBefriendingAndSupport="{!v.displayBefriendingAndSupport}" />
+            </div>
+        </aura:if>
+    </aura:if>
+    <aura:if isTrue="{!v.clientFormViewMode}">
+        <aura:if isTrue="{!v.selectedStepClient == 'step1'}">
+            <div>
+                <c:ClientRegistrationViewOnlyStep1 client="{!v.clientDetails}" />
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.selectedStepClient == 'step2'}">
+            <div>
+                <aura:if isTrue="{!not(v.clientDetails.Is_BS_section_updated__c)}">
+                    <c:ClientRegistrationViewOnlyStep2 client="{!v.clientDetails}" referringAgentEmail="{!v.email}"
+                        volunteerType="BefriendingAndSupport" />
+                    <aura:set attribute="else">
+                        <c:ClientRegistrationViewOnlyStep2 client="{!v.clientDetails}" referringAgentEmail="{!v.email}"
+                            volunteerType="GoodFoodDelivered" />
+                    </aura:set>
+                </aura:if>
+            </div>
+        </aura:if>
+    </aura:if>
+    <aura:if isTrue="{!v.bothSectionsCompleted}">
+        <div class="slds-grid slds-wrap" style="padding-left: 20%;">
+            <div class="slds-col" style="width : 2px;">
+                Befriending and Support Form Completed :
+            </div>
+            <div class="slds-col" style="padding-right: 50%;">
+                <aura:if isTrue="{!v.clientDetails.Is_BS_section_updated__c}">
+                    <lightning:icon iconName="action:approval" variant="bare" size="xx-small" />
+                    <aura:set attribute="else">
+                        <lightning:icon iconName="action:close" variant="bare" size="xx-small" />
+                    </aura:set>
+                </aura:if>
+            </div>
+        </div>
+        <br></br>
+        <div class="slds-grid slds-wrap" style="padding-left: 20%;">
+            <div class="slds-col" style="width : 2px;">
+                Good Food Delivered Form Completed :
+            </div>
+            <div class="slds-col" style="padding-right: 50%;">
+                <aura:if isTrue="{!v.clientDetails.Is_GFD_section_updated__c}">
+                    <lightning:icon iconName="action:approval" variant="bare" size="xx-small" />
+                    <aura:set attribute="else">
+                        <lightning:icon iconName="action:close" variant="bare" size="xx-small" />
+                    </aura:set>
+                </aura:if>
+            </div>
+        </div>
+        <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+            <span class="slds-assistive-text">warning</span>
+            <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small"
+                title="Description of icon when needed">
+                <lightning:icon iconName="utility:warning" aria-hidden="true" />
+            </span>
+            <h2>Please &nbsp;<a href="https://makingconnections.ie/contact/" target="_blank"> Contact us</a>&nbsp; to
+                update your details.
+            </h2>
+        </div>
+    </aura:if>
+</aura:component>

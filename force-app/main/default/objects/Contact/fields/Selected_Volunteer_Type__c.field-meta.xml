@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Selected_Volunteer_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Selected Volunteer Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BefriendingAndSupport</fullName>
+                <default>false</default>
+                <label>Befriending And Support</label>
+            </value>
+            <value>
+                <fullName>GoodFoodDelivered</fullName>
+                <default>false</default>
+                <label>Good Food Delivered</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

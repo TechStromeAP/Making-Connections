@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reference_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Reference Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending (default)</fullName>
+                <default>false</default>
+                <label>Pending (default)</label>
+            </value>
+            <value>
+                <fullName>In progress</fullName>
+                <default>false</default>
+                <label>In progress</label>
+            </value>
+            <value>
+                <fullName>Reference Calls Complete</fullName>
+                <default>false</default>
+                <label>Reference Calls Complete</label>
+            </value>
+            <value>
+                <fullName>Reviewed - Approved</fullName>
+                <default>false</default>
+                <label>Reviewed - Approved</label>
+            </value>
+            <value>
+                <fullName>Reviewed - Not Eligible</fullName>
+                <default>false</default>
+                <label>Reviewed - Not Eligible</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

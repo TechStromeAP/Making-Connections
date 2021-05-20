@@ -1,0 +1,251 @@
+<aura:component controller="ClientRegistrationController" access="global">
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="objInfo" type="Account" default="{sobjectType : 'Account'}" />
+
+    <aura:attribute name="befriendingAgencyOptions" type="List" />
+    <aura:attribute name="referralSourceOptions" type="List" />
+    <aura:attribute name="serviceSelectionOptions" type="List" />
+    <aura:attribute name="client" type="Account" />
+
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+            <span class="slds-truncate slds-p-horizontal_small" title="B and S Referral Source">B&amp;S Referral
+                Source</span>
+        </h3>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="bsReferralSourceName"
+                    label="B&amp;S Referral Source Name" value="{!v.client.B_S_Referral_Source_Name__c}" type="text"
+                    required="true" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="bsReferralSourceSurName"
+                    label="B&amp;S Referral Source surname" value="{!v.client.B_S_Referral_Source_surname__c}"
+                    type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="bsProfTitle" label="Professional Title"
+                    value="{!v.client.Professional_Title__c}" type="text" required="true" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:combobox aura:id="clientRegistrationForm" name="bsSourceOfReferral"
+                    label="B&amp;S Source of referral" options="{! v.referralSourceOptions}"
+                    value="{!v.client.BS_Source_of_referral__c}" type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="bsPhone"
+                    label="B&amp;S Referral Source Telephone" value="{!v.client.B_S_Referral_Source_Telephone__c}"
+                    type="tel" required="true" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="bsEmail" label="B&amp;S Referral Source Email"
+                    value="{!v.client.B_S_Referral_Source_Email__c}" type="email" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="bsDate" label="B&amp;S Referral Source Date"
+                    value="{!v.client.B_S_Referral_Source_Date__c}" type="Date" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+            <span class="slds-truncate slds-p-horizontal_small" title="B&amp;S Informed Consent
+            ">B&amp;S Informed Consent</span>
+        </h3>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client Consented to Referral"
+                    name="consentToReff" checked="{!v.client.Client_Consented_to_Referral__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client Consent to GP"
+                    name="consentToGp" checked="{!v.client.Client_Consent_to_GP__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+            <span class="slds-truncate slds-p-horizontal_small" title="Check Update Client Profile ">Check + Update
+                Client Profile </span>
+        </h3>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:combobox aura:id="clientRegistrationForm" name="serviceSelection" label="Service Selection"
+                    value="{!v.volunteer.Service_Selection__c}" options="{! v.serviceSelectionOptions }" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:textarea aura:id="clientRegistrationForm" name="furtherInfo"
+                    label="Further info (Covd-19 Supports)" value="{!v.client.Further_info_Covd_19_Supports__c}"
+                    type="text" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:textarea aura:id="clientRegistrationForm" name="reasonForReff" label="Reason for Referral"
+                    value="{!v.client.Reason_for_Referral}" type="text" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem size="6">
+                <lightning:textarea aura:id="clientRegistrationForm" name="befriendingAgencyName"
+                    label="Befriending Agency Name" value="{!v.client.Befriending_Agency_Name__c}" type="text" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+            <span class="slds-truncate slds-p-horizontal_small" title="Practical &amp; Social Supports">Practical &amp;
+                Social Supports</span>
+        </h3>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Home Supports" name="homeSupp"
+                    checked="{!v.volunteer.Home_Supports__c}" messageToggleActive="Yes" messageToggleInactive="No" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Day Care" name="dayCare"
+                    checked="{!v.volunteer.Day_care__c}" messageToggleActive="Yes" messageToggleInactive="No" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Meal Supply" name="mealSupply"
+                    checked="{!v.volunteer.Meal_Supply__c}" messageToggleActive="Yes" messageToggleInactive="No" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Family Visit" name="familyVisit"
+                    checked="{!v.volunteer.Family_Visit__c	}" messageToggleActive="Yes" messageToggleInactive="No" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <br></br>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem size="6">
+                <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Friends/Neighbours"
+                    name="fiendsNeigh" checked="{!v.volunteer.Friends_Neighbours__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem size="12">
+                <lightning:textarea aura:id="clientRegistrationForm" name="detailsOfSupp"
+                    label="If yes, give days/ times for each support" value="{!v.client.Details_of_Support__c}"
+                    type="text" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+            <span class="slds-truncate slds-p-horizontal_small" title="Health Information">Health Information</span>
+        </h3>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="speech" label="Speech"
+                    value="{!v.client.Speech__c}" type="text" required="true" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="hearing" label="Hearing"
+                    value="{!v.client.Hearing__c}" type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="vision" label="Vision"
+                    value="{!v.client.Vision__c}" type="text" required="true" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="mobility" label="Mobility"
+                    value="{!v.client.Mobility__c}" type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <br></br>
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem size="12">
+                <lightning:input aura:id="clientRegistrationForm" name="cognitiveStatus" label="Cognitive Status"
+                    value="{!v.client.Cognitive_Status__c}" type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade backgroundColor">
+            <span class="slds-truncate slds-p-horizontal_small" title="Profile for Befriending">Profile for
+                Befriending</span>
+        </h3>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client lives alone"
+                    name="livesAlone" checked="{!v.client.Client_lives_alone__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client has a spouse"
+                    name="hasSpouse" checked="{!v.client.Client_has_a_spouse__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client has children"
+                    name="hasChildren" checked="{!v.client.Client_has_children__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client is a smoker"
+                    name="isSmoker" checked="{!v.client.Client_is_a_smoker__c}" messageToggleActive="Yes"
+                    messageToggleInactive="No" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client has pets" name="hasPets"
+                    checked="{!v.client.Client_has_pets__c}" messageToggleActive="Yes" messageToggleInactive="No" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="prefoccupation" label="Previous Occupation"
+                    value="{!v.volunteer.Previous_occupation__c}" type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <br></br>
+        <lightning:layout horizontalAlign="space">
+            <lightning:layoutItem size="6">
+                <lightning:textarea aura:id="clientRegistrationForm" name="furtherInfo"
+                    label="Any specific interests/ hobbies" value="{!v.client.Any_specific_interests_hobbies__c}"
+                    type="text" />
+            </lightning:layoutItem>
+            &nbsp;
+            <lightning:layoutItem size="6">
+                <lightning:input aura:id="clientRegistrationForm" name="prefoccupation"
+                    label="Any specific RISK concerns (client or volunteer)"
+                    value="{!v.volunteer.BS_Any_specific_RISK_concerns__c}" type="text" required="true" />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

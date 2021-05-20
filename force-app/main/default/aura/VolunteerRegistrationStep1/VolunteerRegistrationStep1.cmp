@@ -1,0 +1,222 @@
+<aura:component>
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="days" type="List" default="[]" />
+    <aura:attribute name="nameFields" type="List" default="['firstName', 'lastName']" />
+    <aura:attribute name="volunteer" type="Contact" default="{ 'sobjectType': 'Contact',
+        'FirstName': '',
+        'LastName': '',
+        'Email': '',
+        'Phone': '',
+        'MobilePhone' : '',
+        }" />
+    <aura:attribute name="selectedAfternoonDays" type="List" />
+    <aura:attribute name="selectedEveningDays" type="List" />
+    <aura:attribute name="selectedMorningDays" type="List" />
+    <aura:registerEvent name="nextInStep1VolunteerReg" type="c:NextInStep1VolunteerReg" />
+    <div class="slds-scrollable">
+        <div class="slds-card">
+            <lightning:progressBar value="0" size="large" />
+            <div class="c-container" style="width: 80%; padding-left : 20%;">
+                <div class="slds-page-header slds-page-header_record-home backgroundColor ">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity">
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                                <span class="slds-page-header__title slds-truncate"
+                                                    title="MAKING CONNECTIONS VOLUNTEER REGISTRATION">MAKING CONNECTIONS
+                                                    VOLUNTEER REGISTRATION</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Experience and Interest">Experience
+                            &amp; Interest</span>
+                    </h3>
+                    <lightning:textarea aura:id="volunteerRegistrationForm" name="previousVolunteering"
+                        label="Previous volunteering/ community experience (if any)"
+                        value="{!v.volunteer.Previous_volunteering_experience_if_any__c}" type="text" required="true" />
+                    <lightning:textarea aura:id="volunteerRegistrationForm" name="attractedTo"
+                        label="What attracted you to volunteer with Making Connections?"
+                        value="{!v.volunteer.What_attracted_you_to_Making_Connections__c}" type="text"
+                        required="true" />
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="In Case of Emergecy">In Case of
+                            Emergecy</span>
+                    </h3>
+                    <br></br>
+                    <lightning:card title="Emergency Contact details" iconName="utility:user" variant="base"
+                        class="slds-card_boundary">
+                        <div class="slds-card__body_inner">
+                            <div class="slds-form slds-form_stacked">
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="12">
+                                        <lightning:inputName aura:id="volunteerRegistrationForm"
+                                            firstName="{!v.volunteer.Emergency_Contact_First_Name__c}"
+                                            lastName="{!v.volunteer.Emergency_Contact_Surname__c}" label="Full Name"
+                                            required="true" variant="label-inline" fieldsToDisplay="{!v.nameFields}" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="emergencyTelMobile"
+                                            label="Telephone (mobile)"
+                                            value="{!v.volunteer.Emergency_Contact_Mobile__c}" type="tel"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="emergencyTelLandline"
+                                            label="Telephone (Landline)"
+                                            value="{!v.volunteer.Emergency_Contact_Landline__c}" type="tel" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="spread">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="emergencyTelLandline"
+                                            label="Relationship to you" value="{!v.volunteer.Relationship_to_you__c}"
+                                            type="text" required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="spread">
+                                    <lightning:layoutItem size="12">
+                                        <lightning:input type="toggle" aura:id="volunteerRegistrationForm"
+                                            label="Do you have any medical condition or illness that might affect your work as a volunteer?"
+                                            name="visitSomeone"
+                                            checked="{!v.volunteer.Any_medical_condition_or_illness__c }"
+                                            messageToggleActive="Yes" messageToggleInactive="No" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <aura:if isTrue="{!v.volunteer.Any_medical_condition_or_illness__c }">
+                                    <lightning:textarea label="If 'yes' give details"
+                                        value="{!v.volunteer.Elaborate_on_your_selections__c}" variant="standard"
+                                        aura:id="volunteerRegistrationForm" required="true" />
+                                </aura:if>
+                            </div>
+                        </div>
+                    </lightning:card>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="References">References</span>
+                    </h3>
+                    <p>
+                        <b>
+                            {!$Label.c.In_Case_Emergency_Section}
+
+                        </b>
+                    </p>
+                    <lightning:card title="Reference 1 details" iconName="utility:user" variant="base"
+                        class="slds-card_boundary">
+                        <div class="slds-card__body_inner">
+                            <div class="slds-form slds-form_stacked">
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref1Name"
+                                            label="Full Name" value="{!v.volunteer.Reference_1_Name__c}" type="text"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref1PosCompnay"
+                                            label="Position/ Company" value="{!v.volunteer.Ref1_Position_Company__c}"
+                                            type="text" required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="spread">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref1Email"
+                                            label="Email" value="{!v.volunteer.Ref1_Email__c}" type="email"
+                                            required="true" />
+                                    </lightning:layoutItem>
+
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref1TelMobile"
+                                            label="Telephone (mobile)" value="{!v.volunteer.Ref1_Telephone_mobile__c}"
+                                            type="tel" required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref1TelLandline"
+                                            label="Telephone (Landline)"
+                                            value="{!v.volunteer.Ref1_Telephone_landline__c}" type="tel" />
+                                    </lightning:layoutItem>
+
+                                </lightning:layout>
+                            </div>
+                        </div>
+                    </lightning:card>
+                    <lightning:card title="Reference 2 details" iconName="utility:user" variant="base"
+                        class="slds-card_boundary">
+                        <div class="slds-card__body_inner">
+                            <div class="slds-form slds-form_stacked">
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref2Name"
+                                            label="Full Name" value="{!v.volunteer.Reference_2_Name__c}" type="text"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref2PosCompany"
+                                            label="Position/ Company" value="{!v.volunteer.Ref2_Position_Company__c}"
+                                            type="text" required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="spread">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref2Email"
+                                            label="Email" value="{!v.volunteer.Ref2_Email__c}" type="email"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref2TelMobile"
+                                            label="Telephone (mobile)" value="{!v.volunteer.Ref2_Telephone_mobile__c}"
+                                            type="tel" required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="volunteerRegistrationForm" name="ref2TelLandline"
+                                            label="Telephone (Landline)"
+                                            value="{!v.volunteer.Ref2_Telephone_landline__c}" type="tel" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </div>
+                        </div>
+                    </lightning:card>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_8-of-12">
+            <span></span>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleNextClick}" label="Next" variant="brand" />
+            </span>
+        </div>
+    </div>
+    <br></br>
+</aura:component>

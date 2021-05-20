@@ -1,0 +1,252 @@
+<aura:component access="global" controller="RegistrationFormController">
+    <aura:attribute name="volunteerEntrolmentType" type="List" default="[
+													{'label': 'Befriending And Support', 'value': 'BefriendingAndSupport'},
+													{'label': 'Good Food Delivered', 'value': 'GoodFoodDelivered'}
+												 ]" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="selectedVolunteerTypes" type="List" />
+    <aura:attribute name="volunteerTypes" type="List" />
+    <aura:attribute name="selectedAfternoonDays" type="List" />
+    <aura:attribute name="selectedEveningDays" type="List" />
+    <aura:attribute name="selectedMorningDays" type="List" />
+    <aura:attribute name="selectedDrivingDays" type="List" />
+    <aura:attribute name="displayGoodFoodDelivered" type="Boolean" />
+    <aura:attribute name="displayBefriendingAndSupport" type="Boolean" />
+    <aura:attribute name="days" type="List" default="[]" />
+    <aura:attribute name="transportationOptions" type="List" />
+    <aura:attribute name="selectedTransportations" type="List" />
+    <aura:attribute name="objInfo" type="Contact" default="{sobjectType : 'Contact'}" />
+    <aura:attribute name="volunteer" type="Contact" />
+    <aura:attribute name="interestOptions" type="List" default="[]" />
+    <aura:attribute name="selectedInterests" type="List" default="[]" />
+    <aura:attribute name="drivingDays" type="List" default="[]" />
+    <aura:registerEvent name="PreviousVolunteerRegistrationFormInStep2"
+        type="c:PreviousVolunteerRegistrationFormInStep2" />
+    <aura:registerEvent name="NextInStep2VolunteerReg" type="c:NextInStep2VolunteerReg" />
+
+    <div class="slds-card">
+        <lightning:progressBar value="40" size="large" />
+        <div class="c-container" style="width: 80%; padding-left : 20%;">
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                    <span class="slds-truncate slds-p-horizontal_small"
+                        title="VOLUNTEER OPPORTUNITY SELECTION">VOLUNTEER OPPORTUNITY SELECTION</span>
+                </h3>
+                <lightning:dualListbox aura:id="enrolmentType" name="enrolmentType"
+                    label="Please select the volunteer opportunity you want to register for:"
+                    sourceLabel="Available Volunteer Type" selectedLabel="Selected Volunteer Type"
+                    options="{!v.volunteerEntrolmentType}"
+                    fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once."
+                    value="{!v.selectedVolunteerTypes}" onchange="{!c.handleEnrolmentTypeChange}" required="true" />
+            </div>
+
+
+            <aura:if isTrue="{!v.displayBefriendingAndSupport}">
+                <div class="slds-page-header slds-page-header_record-home backgroundColor ">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity">
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                                <span class="slds-page-header__title slds-truncate"
+                                                    title="Befriending and Support volunteering">BEFRIENDING &amp;
+                                                    SUPPORTS VOLUNTEERING</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Volunteer Availability">Volunteer
+                            Availability</span>
+                    </h3>
+                    <p>
+                        <b>
+                            {!$Label.c.Volunteer_Availability_Section}
+                        </b>
+                    </p>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:dualListbox aura:id="availableMorningDays" name="availableMorningDays"
+                                label="What days are you available in the Morning?" sourceLabel="Available Days"
+                                selectedLabel="Selected Days" options="{!v.days}"
+                                fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once." value="{!v.selectedMorningDays}"
+                                required="true" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:dualListbox aura:id="availableAfternoonDays" name="availableAfternoonDays"
+                                label="What days are you available in the Afternoon?" sourceLabel="Available Days"
+                                selectedLabel="Selected Days" options="{!v.days}" value="{!v.selectedAfternoonDays}"
+                                fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once." required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:dualListbox aura:id="availableEveningDays" name="availableEveningDays"
+                                label="What days are you available in the Evening?" sourceLabel="Available Days"
+                                selectedLabel="Selected Days" options="{!v.days}"
+                                fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once." value="{!v.selectedEveningDays}"
+                                required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="volunteerRegistrationForm" name="availabilityNotes"
+                                label="Availability Notes" value="{!v.volunteer.Availability_Notes__c}" type="text"
+                                required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Interests">Interests</span>
+                    </h3>
+                    <lightning:dualListbox aura:id="interestOpt" name="interestOpt"
+                        label="Please tell us a little more about any special skills, hobbies or interests that you would like to share in your volunteer work."
+                        sourceLabel="Available interests" selectedLabel="Selected interests"
+                        options="{!v.interestOptions}"
+                        fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once."
+                        value="{!v.selectedInterests}" required="true" />
+                    <br></br>
+                    <lightning:textarea label="Please elaborate on your selections"
+                        value="{!v.volunteer.Elaborate_on_your_selections__c}" variant="standard"
+                        aura:id="volunteerRegistrationForm" required="true" />
+
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Befriending Preferences">Befriending
+                            Preferences</span>
+                    </h3>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="volunteerRegistrationForm"
+                                label="Will you visit someone with pets?" name="visitSomeone"
+                                checked="{!v.volunteer.Will_you_visit_someone_with_pets__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="volunteerRegistrationForm"
+                                label="Will you visit a smoker? " name="visitSmoker"
+                                checked="{!v.volunteer.Will_you_visit_a_smoker__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.displayGoodFoodDelivered}">
+                <div class="slds-page-header slds-page-header_record-home backgroundColor ">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity">
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                                <span class="slds-page-header__title slds-truncate"
+                                                    title="Good Food Delivered">GOOD FOOD DELIVERED DRIVER
+                                                    VOLUNTEERING</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Delivery Availability">Delivery
+                            Availability</span>
+                    </h3>
+                    <p>
+                        <b>
+                            {!$Label.c.Delivery_Availability_Section}
+                        </b>
+                    </p>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:dualListbox aura:id="availableDeliveryDays" name="availableMorningDays"
+                                label="What days are you available for delivery driving?" sourceLabel="Available Days"
+                                selectedLabel="Selected Days" options="{!v.drivingDays}"
+                                fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once." value="{!v.selectedDrivingDays}"
+                                required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Vehicle Details">Vehicle
+                            Details</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="volunteerRegistrationForm" name="carColor" label="Car Color"
+                                value="{!v.volunteer.Car_Colour__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="volunteerRegistrationForm" name="carMake" label="Car make"
+                                value="{!v.volunteer.Car_make__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="volunteerRegistrationForm" name="carModel" label="Car model"
+                                value="{!v.volunteer.Car_model__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="volunteerRegistrationForm" name="carRegNumbeer"
+                                label="Car registration number" value="{!v.volunteer.Car_registration_number__c}"
+                                type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:input type="toggle" aura:id="volunteerRegistrationForm"
+                        label="Do you have access to a printer?" name="visitSomeone"
+                        checked="{!v.volunteer.Do_you_have_access_to_a_printer__c}" messageToggleActive="Yes"
+                        messageToggleInactive="No" />
+                </div>
+            </aura:if>
+
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_5-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleBackClick}" label="Back" variant="neutral" />
+            </span>
+        </div>
+        <div class="slds-col slds-size_7-of-12">
+            <span style="margin-left : 200px;">
+                <lightning:button onclick="{!c.handleNextInStep2}" label="Next" variant="brand" />
+            </span>
+        </div>
+    </div>
+    <br></br>
+</aura:component>

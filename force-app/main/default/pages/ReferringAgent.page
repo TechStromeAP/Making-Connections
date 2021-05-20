@@ -1,0 +1,16 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" lightningStylesheets="true">
+	<apex:slds />
+    <apex:includeLightning />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="lightning" />
+    <script>
+        $Lightning.use("c:ReferringAgentApp", function() {
+            $Lightning.createComponent("c:ReferringAgentRegistrationForm",
+              "",
+              "lightning",
+              function(cmp) {
+                console.log('Lightining Volunteer Expession Component invoked');
+            });
+        });
+    </script>  
+</apex:page>

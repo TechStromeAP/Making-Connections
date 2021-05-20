@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client_Type_of_contact__c</fullName>
+    <description>This field is created to select multiple values from 
+Main POC
+NOK
+GFD Invoicing
+Emergency only</description>
+    <externalId>false</externalId>
+    <label>Type of contact</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Main POC</fullName>
+                <default>false</default>
+                <label>Main POC</label>
+            </value>
+            <value>
+                <fullName>NOK</fullName>
+                <default>false</default>
+                <label>NOK</label>
+            </value>
+            <value>
+                <fullName>GFD Invoicing</fullName>
+                <default>false</default>
+                <label>GFD Invoicing</label>
+            </value>
+            <value>
+                <fullName>Emergency only</fullName>
+                <default>false</default>
+                <label>Emergency only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

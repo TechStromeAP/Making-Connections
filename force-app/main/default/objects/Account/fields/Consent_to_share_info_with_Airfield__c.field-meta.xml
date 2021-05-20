@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_to_share_info_with_Airfield__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is created for GFD. Consent to share info with Airfield (invoicing)</description>
+    <externalId>false</externalId>
+    <label>Consent to share info with Airfield</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active_Supports__c</fullName>
+    <externalId>false</externalId>
+    <label>Active Supports</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Befriending Visits</fullName>
+                <default>false</default>
+                <label>Befriending Visits</label>
+            </value>
+            <value>
+                <fullName>Befriending Calls</fullName>
+                <default>false</default>
+                <label>Befriending Calls</label>
+            </value>
+            <value>
+                <fullName>Good Food Delivered&lt;br&gt;Hospital discharge support</fullName>
+                <default>false</default>
+                <label>Good Food Delivered&lt;br&gt;Hospital discharge support</label>
+            </value>
+            <value>
+                <fullName>Covid-19 Shopping</fullName>
+                <default>false</default>
+                <label>Covid-19 Shopping</label>
+            </value>
+            <value>
+                <fullName>Covid-19 Pension</fullName>
+                <default>false</default>
+                <label>Covid-19 Pension</label>
+            </value>
+            <value>
+                <fullName>Support to Exercise</fullName>
+                <default>false</default>
+                <label>Support to Exercise</label>
+            </value>
+            <value>
+                <fullName>Book Drop/ Library&lt;br&gt;Digital literacy</fullName>
+                <default>false</default>
+                <label>Book Drop/ Library&lt;br&gt;Digital literacy</label>
+            </value>
+            <value>
+                <fullName>Events: live/ online</fullName>
+                <default>false</default>
+                <label>Events: live/ online</label>
+            </value>
+            <value>
+                <fullName>Events: neighbourhood&lt;br&gt;Home (family volunteering)</fullName>
+                <default>false</default>
+                <label>Events: neighbourhood&lt;br&gt;Home (family volunteering)</label>
+            </value>
+            <value>
+                <fullName>Link to: external services&lt;br&gt;</fullName>
+                <default>false</default>
+                <label>Link to: external services&lt;br&gt;</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

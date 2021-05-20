@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Details_of_Support__c</fullName>
+    <description>If yes, give days/ times for each support</description>
+    <externalId>false</externalId>
+    <inlineHelpText>If yes, give days/ times for each support</inlineHelpText>
+    <label>Details of Support</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

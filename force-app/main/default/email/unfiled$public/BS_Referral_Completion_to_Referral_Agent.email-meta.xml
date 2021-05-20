@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>UTF-8</encodingKey>
+    <name>BS Referral Completion to Referral Agent</name>
+    <style>none</style>
+    <subject>Referral Received for {!Account.Client_Name__c} {!Account.Client_Surname__c} (Making Connections)</subject>
+    <textOnly>Dear {!Contact.Name}
+
+Thank you for submitting a referral for {!Account.Client_Name__c} {!Account.Client_Surname__c}  for Making Connections’ Befriending &amp; Supports service. The Client Information Leaflet for clients/ nok is available on the Befriending &amp; Supports referrals webpage.
+
+If any of your clients require support, we are currently accepting referrals; 
+Good Food Delivered: https://makingconnections.ie/good-food-delivered-referrals 
+Befriending &amp; Supports: https://makingconnections.ie/referral-pack/
+
+I will be in touch again once this referral has been processed. 
+
+Kind Regards
+Mary O’Donohue
+-----------------------------------------------------------------------------------------------------
+
+Making Connections COVID-19 Response: Befriending and Supports for older people
+Phone:       +353 1 295 1053
+Website:   www.makingconnections.ie 
+Facebook: http://facebook.com/makingconnections.ie 
+Twitter:     http://twitter.com/connections_ie
+
+Making Connections
+Glenard, 36 Roebuck Clonskeagh Dublin 14
+
+Making Connections is a registered Charity CHY 21301</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

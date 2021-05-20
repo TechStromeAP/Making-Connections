@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_to_share_into_with_HSE__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is created for GFD.Consent to share into with HSE</description>
+    <externalId>false</externalId>
+    <label>Consent to share into with HSE</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

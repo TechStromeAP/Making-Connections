@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volunteers</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>CONTACT.PHONE1</columns>
+    <columns>CONTACT.EMAIL</columns>
+    <columns>Selected_Volunteer_Type__c</columns>
+    <columns>Volunteer_Status__c</columns>
+    <columns>Volunteer_Start_Date__c</columns>
+    <columns>Volunteer_Finish_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CONTACT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Contact.Volunteer</value>
+    </filters>
+    <label>Volunteers</label>
+    <language>en_US</language>
+</ListView>

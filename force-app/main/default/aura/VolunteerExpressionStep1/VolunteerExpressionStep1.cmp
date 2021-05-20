@@ -1,0 +1,69 @@
+<aura:component controller="VolunteerExpressionController">
+    <aura:attribute name="step" type="String" />
+    <aura:attribute name="nameFields" type="List" default="['firstName', 'lastName']" />
+    <aura:attribute name="lead" type="Lead" default="{ 'sobjectType': 'Lead',
+        'FirstName': '',
+        'LastName': '',
+        'Email': '',
+        'Phone': '',
+        'MobilePhone' : '',
+        }" />
+    <aura:registerEvent name="nextInStep1" type="c:NextInStep1" />
+    <div class="slds-card">
+        <lightning:progressBar value="0" size="large" />
+        <div class="c-container" style="width: 80%; padding-left : 20%;">
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Personal Details">Personal Details</span>
+                </h3>
+                <lightning:inputName aura:id="volunteerInterestForm" firstName="{!v.lead.FirstName}"
+                    lastName="{!v.lead.LastName}" label="Full Name" required="true" variant="label-inline"
+                    fieldsToDisplay="{!v.nameFields}" />
+                <lightning:inputAddress aura:id="leadAddress" addressLabel="Address" streetLabel="Street"
+                    cityLabel="Town/Area" countryLabel="Country" provinceLabel="County" postalCodeLabel="Eircode"
+                    street="{!v.lead.Street}" city="{!v.lead.City}" country="{!v.lead.Country}"
+                    province="{!v.lead.State}" postalCode="{!v.lead.PostalCode}" required="true" />
+                <lightning:layout horizontalAlign="space">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerInterestForm" name="dob" label="Date of Birth (MM/DD/YYYY)"
+                            value="{!v.lead.DOB__c}" required="true" type="date"
+                            fieldLevelHelp="Please pick a date from the Calendar or Enter in MM/DD/YYYY format" />
+                    </lightning:layoutItem>
+                    &nbsp;
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerInterestForm" type="email" label="Email" name="email"
+                            required="true" value="{!v.lead.Email}" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout horizontalAlign="space">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerInterestForm" name="mobile" label="Telephone (Mobile)"
+                            value="{!v.lead.MobilePhone}" required="true" type="tel" />
+                    </lightning:layoutItem>
+                    &nbsp;
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerInterestForm" name="landline" label="Telephone (Landline)"
+                            value="{!v.lead.Phone}" type="tel" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:input aura:id="volunteerInterestForm" name="occupation" label="Occupation"
+                    value="{!v.lead.Occupation__c}" required="true" type="text" />
+                <lightning:input aura:id="volunteerInterestForm" name="nameAndLocation"
+                    label="Name and location of company/ organisation (employer)"
+                    value="{!v.lead.Location_of_workplace__c}" required="true" type="text" />
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_8-of-12">
+            <span></span>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleNextClick}" label="Next" variant="brand" />
+            </span>
+        </div>
+    </div>
+    <br></br>
+</aura:component>

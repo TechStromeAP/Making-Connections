@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BS_Pet_Details__c</fullName>
+    <description>The field is created for BS. If the Client has pets, capture the details of it.</description>
+    <externalId>false</externalId>
+    <label>Pet Details</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

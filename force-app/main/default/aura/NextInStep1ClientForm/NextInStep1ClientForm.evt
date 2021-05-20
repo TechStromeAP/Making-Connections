@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="This event is fired when the next button is clicked in step 1 component">
+    <aura:attribute name="dataFromStepOne" type="Object"/>
+</aura:event>

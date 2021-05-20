@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Potential_Volunteering__c</fullName>
+    <externalId>false</externalId>
+    <label>Potential Volunteering</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Befriending Visits</fullName>
+                <default>false</default>
+                <label>Befriending Visits</label>
+            </value>
+            <value>
+                <fullName>Befriending Calls</fullName>
+                <default>false</default>
+                <label>Befriending Calls</label>
+            </value>
+            <value>
+                <fullName>Good Food DeliveredCovid-19 Shopping</fullName>
+                <default>false</default>
+                <label>Good Food DeliveredCovid-19 Shopping</label>
+            </value>
+            <value>
+                <fullName>Covid-19 Pension</fullName>
+                <default>false</default>
+                <label>Covid-19 Pension</label>
+            </value>
+            <value>
+                <fullName>Support to Exercise</fullName>
+                <default>false</default>
+                <label>Support to Exercise</label>
+            </value>
+            <value>
+                <fullName>Digital literacy</fullName>
+                <default>false</default>
+                <label>Digital literacy</label>
+            </value>
+            <value>
+                <fullName>Events: live/ online</fullName>
+                <default>false</default>
+                <label>Events: live/ online</label>
+            </value>
+            <value>
+                <fullName>Events: neighbourhoodHome (family volunteering)</fullName>
+                <default>false</default>
+                <label>Events: neighbourhoodHome (family volunteering)</label>
+            </value>
+            <value>
+                <fullName>Professional Volunteering</fullName>
+                <default>false</default>
+                <label>Professional Volunteering</label>
+            </value>
+            <value>
+                <fullName>Short Term Volunteering</fullName>
+                <default>false</default>
+                <label>Short Term Volunteering</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

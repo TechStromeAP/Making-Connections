@@ -1,0 +1,27 @@
+<aura:component access="global">
+    <aura:attribute name="lead" type="Lead" default="{ 'sobjectType': 'Lead',
+        'FirstName': '',
+        'LastName': '',
+        'Email': '',
+        'Phone': '',
+        'MobilePhone': '',
+        'Occupation__c' : '',
+        }" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="previous" event="c:previous" action="{!c.handlePrevious}" />
+    <aura:attribute name="selectedStep" type="String" default="step1" />
+    <aura:handler name="nextInStep1VolunteerReg" event="c:NextInStep1VolunteerReg"
+        action="{!c.handleNextInStep1Event}" />
+    <div class="slds-card">
+        <aura:if isTrue="{!v.selectedStep == 'step1'}">
+            <div>
+                <c:VolunteerRegistrationStep1></c:VolunteerRegistrationStep1>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.selectedStep == 'step2'}">
+            <div>
+                <c:VolunteerRegistrationStep2></c:VolunteerRegistrationStep2>
+            </div>
+        </aura:if>
+    </div>
+</aura:component>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conset_to_participate_in_Airfield_resear__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This is created for GFD. Conset to participate in Airfield research</description>
+    <externalId>false</externalId>
+    <label>Conset to participate in Airfield resear</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>

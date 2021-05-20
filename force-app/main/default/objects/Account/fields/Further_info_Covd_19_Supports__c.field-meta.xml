@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Further_info_Covd_19_Supports__c</fullName>
+    <description>*If &apos;yes&apos; for Covid-19 Emergency Supports please specify reason</description>
+    <externalId>false</externalId>
+    <label>Further info (Covd-19 Supports)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volunteer_On_Boarding_Phase__c</fullName>
+    <externalId>false</externalId>
+    <label>Volunteer On-Boarding Phase</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1    &gt; Registration Form Complete</fullName>
+                <default>false</default>
+                <label>1    &gt; Registration Form Complete</label>
+            </value>
+            <value>
+                <fullName>2.1 &gt; Garda Vetting Complete</fullName>
+                <default>false</default>
+                <label>2.1 &gt; Garda Vetting Complete</label>
+            </value>
+            <value>
+                <fullName>2.2 &gt; Induction Complete</fullName>
+                <default>false</default>
+                <label>2.2 &gt; Induction Complete</label>
+            </value>
+            <value>
+                <fullName>2.2 &gt; Documentation Complete</fullName>
+                <default>false</default>
+                <label>2.2 &gt; Documentation Complete</label>
+            </value>
+            <value>
+                <fullName>2.3 &gt; References Complete</fullName>
+                <default>false</default>
+                <label>2.3 &gt; References Complete</label>
+            </value>
+            <value>
+                <fullName>3    &gt; Complete - Ready to Start&quot;</fullName>
+                <default>false</default>
+                <label>3    &gt; Complete - Ready to Start&quot;</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

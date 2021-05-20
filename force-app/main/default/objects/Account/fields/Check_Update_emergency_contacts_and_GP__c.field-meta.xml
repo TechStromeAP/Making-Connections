@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Check_Update_emergency_contacts_and_GP__c</fullName>
+    <description>This is for BS to Check/ Update emergency contacts and GP</description>
+    <externalId>false</externalId>
+    <label>Check/ Update emergency contacts and GP?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No</valueSetName>
+    </valueSet>
+</CustomField>

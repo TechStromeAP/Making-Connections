@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Volunteer_Activity__c$Name</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Activity__c$Volunteer__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Activity__c$Start_Date__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Activity__c$End_Date__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Activity__c$Volunteer_Activity__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Volunteer_Activity__c$Volunteer_Activity__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>,Befriending Visits,Befriending Calls,Good Food Delivered,Covid-19 Shopping,Covid-19 Pension,Support to Exercise,Digital literacy,Events: live/ online,Events: neighbourhood,Home (family volunteering),Professional Volunteering,Short Term Volunteering</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Volunteer Activities Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Volunteer_Activities__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Volunteer_Activity__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

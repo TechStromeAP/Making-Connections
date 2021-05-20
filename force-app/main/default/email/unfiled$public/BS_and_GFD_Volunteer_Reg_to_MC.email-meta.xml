@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This is a email template created for MC admins when they receive interest from volunteers for Befriending enquiry.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>BS and GFD Volunteer Reg to MC</name>
+    <style>none</style>
+    <subject>New Befriending &amp; Supports Volunteer Application {!Contact.Name}</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,15 @@
+.THIS .backgroundColor{
+    background-color : #DDDBDA;
+}
+
+.THIS .slds-button_brand{
+    background-color : #334d91;
+}
+
+.THIS .slds-form-element__label{
+    font-size : 15px;
+}
+
+.THIS .span.slds-truncate.slds-p-horizontal_small{
+	font-size : 18px;
+}

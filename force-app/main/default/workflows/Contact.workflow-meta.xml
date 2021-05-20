@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_to_on_lead_s_creation</fullName>
+        <ccEmails>info@makingconnections.ie</ccEmails>
+        <description>Email to info@makingconnections.ie on volunteer&apos;s creation</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Expression_of_Interest_to_MC</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_MC_BS</fullName>
+        <ccEmails>phossur@techstorm.ie</ccEmails>
+        <description>Send Email to MC BS</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>devmc@makingconnections.ie</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@makingconnections.ie</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/BS_Volunteer_Reg_to_MC</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_MC_GFD</fullName>
+        <description>Send Email to MC GFD</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>devmc@makingconnections.ie</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@makingconnections.ie</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/GFD_Volunteer_Reg_to_MC</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_MC_GFD_and_BS</fullName>
+        <description>Send Email to MC GFD and BS</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>devmc@makingconnections.ie</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>info@makingconnections.ie</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/BS_and_GFD_Volunteer_Reg_to_MC</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_Volunteer_BS</fullName>
+        <description>Send Email to Volunteer BS</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Ref2_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>info@makingconnections.ie</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/BS_Volunteer_Reg_to_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_Volunteer_GFD</fullName>
+        <description>Send Email to Volunteer GFD</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>info@makingconnections.ie</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/GFD_Volunteer_Reg_to_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_to_Volunteer_GFD_and_BS</fullName>
+        <description>Send Email to Volunteer GFD and BS</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Ref1_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <field>Ref2_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>info@makingconnections.ie</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/BS_and_GFD_Volunteer_Reg_to_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>When_volunteer_is_created_send_a_notification_mail</fullName>
+        <description>When volunteer is created send a notification mail</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Ref1_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Expression_of_Interest_to_Volunteer</template>
+    </alerts>
+    <rules>
+        <fullName>BS Volunteer Reg</fullName>
+        <actions>
+            <name>Send_Email_to_MC_BS</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Send_Email_to_Volunteer_BS</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This WF is created when a volunteer registers for Befriending and Service(B&amp;S), an email is triggered to the voulnteer and MC admin.</description>
+        <formula>AND(
+Registration_Form_submitted__c ,
+INCLUDES(Selected_Volunteer_Type__c ,&apos;BefriendingAndSupport&apos;)
+)</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>BS and GFD Volunteer Reg</fullName>
+        <actions>
+            <name>Send_Email_to_MC_GFD_and_BS</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Send_Email_to_Volunteer_GFD_and_BS</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This WF is created when a volunteer registers for Befriending and Service(B&amp;S), an email is triggered to the voulnteer and MC admin.</description>
+        <formula>AND(
+Registration_Form_submitted__c , AND(
+INCLUDES(Selected_Volunteer_Type__c ,&apos;BefriendingAndSupport&apos;),
+INCLUDES(Selected_Volunteer_Type__c ,&apos;GoodFoodDelivered&apos;))
+)</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>GFD Volunteer Reg</fullName>
+        <actions>
+            <name>Send_Email_to_MC_GFD</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Send_Email_to_Volunteer_GFD</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This WF is created when a volunteer registers for Good Food Delivered(GFD), an email is triggered to the voulnteer and MC admin.</description>
+        <formula>AND(
+        Registration_Form_submitted__c ,                
+        INCLUDES(Selected_Volunteer_Type__c ,&apos;GoodFoodDelivered&apos;)
+)</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

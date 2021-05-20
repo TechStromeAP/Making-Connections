@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BS_MC_in_touch_with_volunteer__c</fullName>
+    <description>This is for BS. This is created so that Client knows MC will be in touch with volunteer</description>
+    <externalId>false</externalId>
+    <label>MC in touch with volunteer</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No</valueSetName>
+    </valueSet>
+</CustomField>

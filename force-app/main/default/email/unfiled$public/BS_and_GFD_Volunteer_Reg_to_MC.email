@@ -1,0 +1,5 @@
+Form: Befriending & Supports  and Good Food Delivered – Volunteer Application
+Name: {!Contact.Name}
+
+To view this volunteer’s details on Salesforce click here:
+{!Contact.Link}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volunteer_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Volunteer Type</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Befriending Visits</fullName>
+                <default>false</default>
+                <label>Befriending Visits</label>
+            </value>
+            <value>
+                <fullName>Befriending Calls</fullName>
+                <default>false</default>
+                <label>Befriending Calls</label>
+            </value>
+            <value>
+                <fullName>Additional supports</fullName>
+                <default>false</default>
+                <label>Additional supports</label>
+            </value>
+            <value>
+                <fullName>Covid-19 Shopping</fullName>
+                <default>false</default>
+                <label>Covid-19 Shopping</label>
+            </value>
+            <value>
+                <fullName>Covid-19 Pension</fullName>
+                <default>false</default>
+                <label>Covid-19 Pension</label>
+            </value>
+            <value>
+                <fullName>Good Food Delivered Driving</fullName>
+                <default>false</default>
+                <label>Good Food Delivered Driving</label>
+            </value>
+            <value>
+                <fullName>Professional Volunteering</fullName>
+                <default>false</default>
+                <label>Professional Volunteering</label>
+            </value>
+            <value>
+                <fullName>Short Term Volunteering</fullName>
+                <default>false</default>
+                <label>Short Term Volunteering</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

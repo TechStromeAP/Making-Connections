@@ -1,0 +1,543 @@
+<aura:component access="global" controller="ClientRegistrationController">
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="hseAreas" type="List" />
+    <aura:attribute name="reasonForReferralLabel" type="String" />
+    <aura:attribute name="volunteerType" type="String" />
+    <aura:attribute name="selectedVolunteerTypes" type="List" />
+    <aura:attribute name="referralSourceOptions" type="List" />
+    <aura:attribute name="gfdReferralSourceOptions" type="List" />
+    <aura:attribute name="consentedByOptions" type="List" />
+    <aura:attribute name="invoiceOptions" type="List" />
+    <aura:attribute name="clientHasPetsOptions" type="List" />
+    <aura:attribute name="referringAgentEmail" type="String" />
+    <aura:attribute name="serviceSelectionOptions" type="List" />
+    <aura:attribute name="volunteerTypes" type="List" />
+    <aura:attribute name="billingOptionsLabel" type="String" />
+    <aura:attribute name="referenceStatus" type="List" default="[]" />
+    <aura:attribute name="objInfo" type="Account" default="{sobjectType : 'Account'}" />
+    <aura:attribute name="client" type="Account" default="{sobjectType : 'Account'}" />
+    <aura:registerEvent name="previousInStep2ClientFormViewOnly" type="c:PreviousInStep2ClientFormViewOnly" />
+
+    <div class="slds-card">
+        <lightning:progressBar value="50" size="large" />
+        <div class="c-container" style="width: 80%; padding-left : 20%;">
+            <lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand"
+                size="large" class="slds-hide" />
+            <aura:if isTrue="{!not(v.client.Is_BS_section_updated__c)}">
+                <div class="slds-page-header slds-page-header_record-home backgroundColor ">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity">
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                                <span class="slds-page-header__title slds-truncate"
+                                                    title="Befriending and Support referral Form">BEFRIENDING &amp;
+                                                    SUPPORTS REFERRAL FORM</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <b>
+                        {!$Label.c.Befriending_and_Support_Referral_Source_Section}
+                    </b>
+                </p>
+                <div class="slds-section slds-is-open">
+
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="GP Contact Details">GP Contact
+                            Details</span>
+                    </h3>
+                    <lightning:card title="Client's GP" iconName="utility:user" variant="base"
+                        class="slds-card_boundary">
+                        <div class="slds-card__body_inner">
+                            <div class="slds-form slds-form_stacked">
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="gpName"
+                                            label="GP Full Name" value="{!v.client.GP_Name__c}" type="text"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="gpLocation"
+                                            label="GP Surgery/ Location" value="{!v.client.Surgery_name_location__c}"
+                                            type="text" required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="spread">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="gpPhone"
+                                            label="GP Telephone" value="{!v.client.Client_GP_s_Phone__c}" type="tel"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </div>
+                        </div>
+                    </lightning:card>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Reason for Referral">Reason for
+                            Referral</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="reasonForReff"
+                                label="{!v.reasonForReferralLabel}" value="{!v.client.Reason_for_Referral__c}"
+                                type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+
+                            <lightning:input type="toggle" aura:id="clientRegistrationForm"
+                                label="Has this person been referred to another befriending agency?"
+                                name="anotherBefriendingAgency"
+                                checked="{!v.client.Referred_to_another_befriending_agency__c}"
+                                messageToggleActive="Yes" messageToggleInactive="No" />
+
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="befriendingAgencyName"
+                                label="Befriending Agency Name" value="{!v.client.Befriending_Agency_Name__c}"
+                                type="text" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small"
+                            title="Practical &amp; Social Supports">Practical &amp; Social Supports</span>
+                    </h3>
+                    <br></br>
+                    <p>
+                        <b>
+                            Does the client have any of the following currently in place?
+                        </b>
+                    </p>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Home Supports"
+                                name="homeSupp" checked="{!v.client.Home_Supports__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Day Care"
+                                name="dayCare" checked="{!v.client.Day_Care__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Meal Supply"
+                                name="mealSupply" checked="{!v.client.Meal_Supply__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Family Visit"
+                                name="familyVisit" checked="{!v.client.Family_Visit__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input type="toggle" aura:id="clientRegistrationForm" label="Friends/Neighbours"
+                                name="fiendsNeigh" checked="{!v.client.Friends_Neighbours__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="detailsOfSupp"
+                                label="If yes, give days/ times for each support"
+                                value="{!v.client.Details_of_Support__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small"
+                            title="Health Information Relevant for Communication">Health Information Relevant for
+                            Communication</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="speech" label="Speech"
+                                value="{!v.client.Speech__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="hearing" label="Hearing"
+                                value="{!v.client.Hearing__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="vision" label="Vision"
+                                value="{!v.client.Vision__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="mobility" label="Mobility"
+                                value="{!v.client.Mobility__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input aura:id="clientRegistrationForm" name="cognitiveStatus"
+                                label="Cognitive Status" value="{!v.client.Cognitive_Status__c}" type="text"
+                                required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Profile for Befriending">Profile for
+                            Befriending</span>
+                    </h3>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client lives alone"
+                                name="livesAlone" checked="{!v.client.Client_lives_alone__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client has a spouse"
+                                name="hasSpouse" checked="{!v.client.Client_has_a_spouse__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client has children"
+                                name="hasChildren" checked="{!v.client.Client_has_children__c}"
+                                messageToggleActive="Yes" messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client is a smoker"
+                                name="isSmoker" checked="{!v.client.Client_is_a_smoker__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle" label="Client has Pets"
+                                name="clientHasPets" checked="{!v.client.Client_has_pets__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small"
+                            title="To Facilitate the Right Fit with Volunteer">To Facilitate the Right Fit with
+                            Volunteer</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="prefoccupation"
+                                label="Previous Occupation" value="{!v.client.Previous_occupation__c}" type="text"
+                                required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="furtherInfo"
+                                label="Any specific interests/hobbies"
+                                value="{!v.client.Any_specific_interests_hobbies__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="prefoccupation"
+                                label="Any specific RISK concerns (client or volunteer)"
+                                value="{!v.client.BS_Any_specific_RISK_concerns__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Befriending and Support Informed Consent
+                        ">Declaration of Support Informed Consent</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="bsDate" label="Date of Referral"
+                                value="{!v.client.B_S_Referral_Source_Date__c}" type="Date" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input type="checkbox"
+                                label="I confirm that I have discussed the referral with the Client and I confirm that the Client has given informed consent to be referred to Making Connections"
+                                name="dataProtect" checked="{!v.client.Client_Consented_to_Referral__c}" required="true"
+                                aura:id="clientRegistrationForm" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input type="checkbox"
+                                label="I confirm that the Client has given informed consent for Making Connections to contact their GP/ other relevant health care professionals about the referral and/ or delivery of service"
+                                name="dataProtect" checked="{!v.client.Client_Consent_to_GP__c}" required="true"
+                                aura:id="clientRegistrationForm" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="furtherInfo"
+                                label="Any final comments/ information?" value="{!v.client.Final_Comments__c}"
+                                type="text" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <p>
+                    <b>
+                        {!$Label.c.Subjective_to_Review}
+                    </b>
+                </p>
+            </aura:if>
+            <aura:if isTrue="{!not(v.client.Is_GFD_section_updated__c)}">
+                <div class="slds-page-header slds-page-header_record-home backgroundColor ">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-opportunity">
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                                <span class="slds-page-header__title slds-truncate"
+                                                    title="Good Food Delivered Referral Form">GOOD FOOD DELIVERED
+                                                    REFERRAL FORM</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <b>
+                        {!$Label.c.GFD_Referral_form_Section_Text_1}
+                    </b>
+                </p>
+                <br></br>
+                <p>
+                    <b>
+                        {!$Label.c.GFD_Referral_form_Section_Text_2}
+                    </b>
+                </p>
+
+
+                <lightning:layout horizontalAlign="space">
+                    <lightning:layoutItem size="12">
+                        <lightning:combobox aura:id="clientRegistrationForm" name="hseArea" label="Client's HSE Area"
+                            value="{!v.client.Client_s_HSE_Area__c}" options="{! v.hseAreas }" required="true"
+                            fieldLevelHelp="Option 1: CHO 6 Area 1 (Blackrock, Cabinteely Dalkey, Dun Laoghaire, Loughlinstown, Foxrock)
+                                Option 2: CHO 6 Area 2 (Baggot Street, Balally, Ballinteer, Churchtown, Donnybrook, Dundrum, Leopardstown, Milltown, Ranelagh, Sallynoggin, Sandyford, Sandymount, Shankill, Stillorgan)
+                                Option 3: OTHER (give details)" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Record of Informed Consent">Record of
+                            Informed Consent</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:combobox aura:id="clientRegistrationForm" name="gfdConsentedBy"
+                                label="Who is providing consent for this referral?" options="{! v.consentedByOptions}"
+                                value="{!v.client.Consent_given_by__c}" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle"
+                                label="Has the client/ NOK consented to this referral?" name="clientNokConsent"
+                                checked="{!v.client.GFD_Consent_for_referral__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <br></br>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle"
+                                label="Has the client/NOK consented to information being shared with Making Connections?"
+                                name="clientNokConsentToMc"
+                                checked="{!v.client.Consent_to_share_with_Making_Connections__c}"
+                                messageToggleActive="Yes" messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <aura:if isTrue="{!not(v.client.Consent_to_share_with_Making_Connections__c)}">
+                                <lightning:textarea aura:id="clientRegistrationForm" name="furtherInfo"
+                                    label="Please clarify reason for 'No'"
+                                    value="{!v.client.GFD_Please_clarify_reason_for_no__c}" type="text"
+                                    required="true" />
+                            </aura:if>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle"
+                                label="Has the client/NOK consented to information being shared with the HSE for invoicing purposes?"
+                                name="clientNokConsentToHse" checked="{!v.client.Consent_to_share_into_with_HSE__c}"
+                                messageToggleActive="Yes" messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle"
+                                label="Has the Client/NOK consented to be contacted by Airfield Estate for Client contribution/ invoicing purposes?"
+                                name="clientNokConsentToAirfield"
+                                checked="{!v.client.Consent_to_share_info_with_Airfield__c}" messageToggleActive="Yes"
+                                messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:input aura:id="clientRegistrationForm" type="toggle"
+                                label="Airfield Estate conducts research about food. Does the client consent to be contacted by Airfield about participating in research on the topic of food for older people?"
+                                name="clientNokConsentToResearch"
+                                checked="{!v.client.Conset_to_participate_in_Airfield_resear__c}"
+                                messageToggleActive="Yes" messageToggleInactive="No" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="gfdDate"
+                                label="Good Food Delivered Referral Source Date" value="{!v.client.GFD_Date__c}"
+                                type="Date" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Billing Information">Billing
+                            Information</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:combobox aura:id="clientRegistrationForm" name="gfdInvoiceOptions"
+                                label="{!v.billingOptionsLabel}" options="{! v.invoiceOptions}"
+                                value="{!v.client.Method_of_invoicing__c}" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <label class="slds-form-element__label" for="unique-id-of-input">Name of person for billing (client
+                        or nok assisting with payment)</label>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="invoicingName" label="Name"
+                                value="{!v.client.Invoicing_Name__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="invoicingSurname" label="Surname"
+                                value="{!v.client.Invoicing_Surname__c}" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Client Referral Profile">Client
+                            Referral Profile</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="gfdDate" label="Date of Referral"
+                                value="{!v.client.GFD_Date__c}" type="Date" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="anyAllergens"
+                                label="List any known Food Allergens" value="{!v.client.Allergens_if_any__c}"
+                                type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="gfdReasonForReff"
+                                label="Reason for referral" value="{!v.client.GFD_Reason_for_referral__c}" type="text"
+                                required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="relevantInformation"
+                                label="Relevant Information e.g. Mobility, Deafness, Dementia"
+                                value="{!v.client.Relevant_Information__c }" type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="anyOtherComments"
+                                label="Any other comments/information"
+                                value="{!v.client.GFD_Other_Comments_Information__c}" type="text" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <p>
+                    <b>
+                        {!$Label.c.Subjective_to_Review}
+                    </b>
+                </p>
+            </aura:if>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_5-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleBackClick}" label="Back" variant="neutral" />
+            </span>
+        </div>
+        <div class="slds-col slds-size_7-of-12">
+            <span style="margin-left : 200px;">
+                <lightning:button onclick="{!c.handleSubmitForm}" label="Submit Form" variant="brand"
+                    aura:id="submitButton" />
+            </span>
+        </div>
+    </div>
+    <br></br>
+</aura:component>

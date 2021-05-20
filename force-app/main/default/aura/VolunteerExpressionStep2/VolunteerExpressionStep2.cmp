@@ -1,0 +1,95 @@
+<aura:component controller="VolunteerExpressionController">
+    <aura:attribute name="lead" type="Lead" />
+    <aura:attribute name="step" type="String" />
+    <aura:attribute name="whatSkillsLabel" type="String" />
+    <aura:attribute name="hobbiesInterestLabel" type="String" />
+    <aura:attribute name="questionsCommentsLabel" type="String" />
+    <aura:attribute name="volunteerOpportunities" type="List" default="[]" />
+    <aura:attribute name="days" type="List" default="[]" />
+    <aura:attribute name="selectedVolunteerOpportunities" type="List" />
+    <aura:attribute name="priorSelectedVolunteerOpportunities" type="List" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:registerEvent name="previous" type="c:previous" />
+
+    <div class="slds-card">
+        <lightning:progressBar value="50" size="large" />
+        <div class="c-container" style="width: 80%; padding-left : 20%;">
+            <lightning:spinner aura:id="mySpinner" alternativeText="Processing.." title="Processing.." variant="brand"
+                size="large" class="slds-hide" />
+            <div class="slds-section slds-is-open">
+                <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                    <span class="slds-truncate slds-p-horizontal_small" title="Your Preferences"> Your
+                        Preferences</span>
+                </h3>
+                <lightning:dualListbox aura:id="voluntaryOpportunities" name="voluntaryOptions"
+                    label="What volunteer opportunities are you interested in?" sourceLabel="Available"
+                    selectedLabel="Selected" options="{!v.volunteerOpportunities}"
+                    fieldLevelHelp="Use the arrows to move your selected option from left to right. TIP: hold Ctrl to select multiple options at once."
+                    value="{!v.selectedVolunteerOpportunities}" onchange="{!c.handleChange}" required="true" />
+
+                <lightning:textarea aura:id="volunteerInterestForm" name="volunteerSkills" label="{!v.whatSkillsLabel}"
+                    value="{!v.lead.Volunteer_Skills__c}" type="text" required="true" />
+
+                <lightning:textarea aura:id="volunteerInterestForm" name="hobbiesInterest" required="true"
+                    label="{!v.hobbiesInterestLabel}" value="{!v.lead.Volunteer_hobbies_interests__c}" type="text" />
+                <br></br>
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutItem size="6">
+                        <lightning:input type="toggle" label="Will you have use of a car for volunteering?"
+                            name="drivingLicense" checked="{!v.lead.Have_car_and_full_clean_driving_licence__c}"
+                            messageToggleActive="Yes" messageToggleInactive="No" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                &nbsp;
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerInterestForm" name="availabilityPerWeek"
+                            label="How many hours per week are you interested in volunteering?"
+                            value="{!v.lead.Availability_Per_Week__c}" type="number" required="true" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layout horizontalAlign="spread">
+                    <lightning:layoutItem size="6">
+                        <lightning:input aura:id="volunteerInterestForm" name="committedMonths"
+                            label="How many months can you commit for?"
+                            value="{!v.lead.No_of_months_Volunteer_committed__c}" type="number" required="true" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:layoutItem size="12">
+                    <lightning:textarea aura:id="volunteerInterestForm" name="volunteerAvailability"
+                        label="What days are you available to volunteer? (please indicate mornings/ afternoons/ evenings separately)"
+                        value="{!v.lead.Volunteer_Availability__c}" type="text" required="true" />
+                </lightning:layoutItem>
+                <br></br>
+
+                <lightning:textarea aura:id="volunteerInterestForm" name="forseeableComments"
+                    label="Anything forseeable to interrupt weekly volunteering in the coming 6-12 months (other than usual holiday periods)?"
+                    value="{!v.lead.Anything_forseeable_to_interrupt_Volunte__c}" type="text" required="true" />
+
+                <lightning:layout>
+                    <lightning:layoutItem size="12">
+                        <lightning:textarea aura:id="volunteerInterestForm" name="anyOtherComments"
+                            label="{!v.questionsCommentsLabel}" value="{!v.lead.Any_other_comments_questions__c}"
+                            type="text" required="true" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+        </div>
+        <br></br>
+        <div class="slds-grid slds-wrap" style="text-align:center;">
+            <div class="slds-col slds-size_5-of-12">
+                <span>
+                    <lightning:button onclick="{!c.handleBackClick}" label="Back" variant="neutral" />
+                </span>
+            </div>
+            <div class="slds-col slds-size_7-of-12">
+                <span style="margin-left : 200px;">
+                    <lightning:button onclick="{!c.handleSubmitForm}" label="Submit Form" variant="brand"
+                        aura:id="submitButton" />
+                </span>
+            </div>
+            <br></br>
+        </div>
+        <br></br>
+    </div>
+</aura:component>

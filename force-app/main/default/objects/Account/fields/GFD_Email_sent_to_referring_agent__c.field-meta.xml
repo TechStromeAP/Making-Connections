@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFD_Email_sent_to_referring_agent__c</fullName>
+    <description>This is a date field for GFD for Email sent to referring agent?</description>
+    <externalId>false</externalId>
+    <label>Email sent to referring agent?</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client_s_HSE_Area__c</fullName>
+    <externalId>false</externalId>
+    <label>Client&apos;s HSE Area</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CHO 6 Area 1 (Blackrock, Cabinteely Dalkey, Dun Laoghaire, Loughlinstown, Foxrock)</fullName>
+                <default>false</default>
+                <label>CHO 6 Area 1 (Blackrock, Cabinteely Dalkey, Dun Laoghaire, Loughlinstown, Foxrock)</label>
+            </value>
+            <value>
+                <fullName>CHO 6 Area 2 (Baggot Street, Balally, Ballinteer, Churchtown, Donnybrook, Dundrum, Leopardstown, Milltown, Ranelagh, Sallynoggin, Sandyford, Sandymount, Shankill, Stillorgan)</fullName>
+                <default>false</default>
+                <label>CHO 6 Area 2 (Baggot Street, Balally, Ballinteer, Churchtown, Donnybrook, Dundrum, Leopardstown, Milltown, Ranelagh, Sallynoggin, Sandyford, Sandymount, Shankill, Stillorgan)</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

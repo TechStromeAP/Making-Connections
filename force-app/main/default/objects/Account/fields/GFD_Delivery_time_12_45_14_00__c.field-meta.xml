@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GFD_Delivery_time_12_45_14_00__c</fullName>
+    <description>This is GFD assessment checklist to know if delivery time is (12:45 - 14:00)</description>
+    <externalId>false</externalId>
+    <label>Delivery time (12:45 - 14:00)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>Yes_No</valueSetName>
+    </valueSet>
+</CustomField>

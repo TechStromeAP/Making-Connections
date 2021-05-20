@@ -1,0 +1,16 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" lightningStylesheets="true">
+	<apex:slds />
+    <apex:includeLightning />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="lightning" />
+    <script>
+        $Lightning.use("c:RegistrationApp", function() {
+            $Lightning.createComponent("c:RegistrationForm",
+              "",
+              "lightning",
+              function(cmp) {
+                console.log('Lightining Registration Form Component invoked');
+            });
+        });
+    </script>  
+</apex:page>

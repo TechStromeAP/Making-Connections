@@ -1,0 +1,146 @@
+<aura:component controller="ClientRegistrationController">
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <aura:attribute name="client" type="Account" default="{sobjectType : 'Account', 'Name': ''}" />
+    <aura:attribute name="hseAreas" type="List" />
+    <aura:attribute name="objInfo" type="Account" default="{sobjectType : 'Account'}" />
+    <aura:attribute name="volunteerType" type="String" />
+    <aura:attribute name="clientEmail" type="String" />
+    <aura:registerEvent name="nextInStep1ClientForm" type="c:NextInStep1ClientForm" />
+    <div class="slds-scrollable">
+        <div class="slds-card">
+            <lightning:progressBar value="0" size="large" />
+            <div class="c-container" style="width: 80%; padding-left : 20%;">
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Client Details">Client Details</span>
+                    </h3>
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input name="clientName" label="Client Name" aura:id="clientRegistrationForm"
+                                value="{!v.client.Client_Name__c}" required="true" type="text" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input name="clientName" label="Client Surname" aura:id="clientRegistrationForm"
+                                value="{!v.client.Client_Surname__c}" required="true" type="text" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientDob" name="dob" label="DOB (must be aged 65 or over)"
+                                value="{!v.client.D_O_B__c}" required="true" type="date"
+                                fieldLevelHelp="Age of the Client should be equal to or greater than 65 years" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:inputAddress aura:id="clientAddress" addressLabel="Address" streetLabel="Street"
+                        cityLabel="Town/Area" countryLabel="Country" provinceLabel="County" postalCodeLabel="Eircode"
+                        street="{!v.client.BillingStreet}" city="{!v.client.BillingCity}"
+                        country="{!v.client.BillingCountry}" province="{!v.client.BillingState}"
+                        postalCode="{!v.client.BillingPostalCode}" required="true" />
+                    <lightning:layout horizontalAlign="space">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="mainPhone"
+                                label="Phone (main number)" value="{!v.client.Phone}" required="true" type="tel" />
+                        </lightning:layoutItem>
+                        &nbsp;
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="alternativePhone"
+                                label="Phone (alternative if relevant)" value="{!v.client.Phone_alternative__c}"
+                                type="tel" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="6">
+                            <lightning:input aura:id="clientRegistrationForm" name="clientPublicNurse"
+                                label="Client's Public Health Nurse" value="{!v.client.Client_s_Public_Health_Nurse__c}"
+                                type="text" required="true" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                    <lightning:layout horizontalAlign="spread">
+                        <lightning:layoutItem size="12">
+                            <lightning:textarea aura:id="clientRegistrationForm" name="clientsHealthCentre"
+                                label="Client's Health Centre name and location"
+                                value="{!v.client.Client_s_Health_Centre_name_and_location__c}" required="true"
+                                type="text" />
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <div class="slds-section slds-is-open">
+                    <h3 class="slds-section__title slds-theme_shade backgroundColor">
+                        <span class="slds-truncate slds-p-horizontal_small"
+                            title="Alternative Contact Person">Alternative Contact Person</span>
+                    </h3>
+                    <br></br>
+                    <lightning:card title="Next of Kin (or other suitable contact)" iconName="utility:user"
+                        variant="base" class="slds-card_boundary">
+                        <div class="slds-card__body_inner">
+                            <div class="slds-form slds-form_stacked">
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1Name"
+                                            label="First Name" value="{!v.client.Client_Contact_Person_1_First_Name__c}"
+                                            type="text" required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1PosCompnay"
+                                            label="Surname" value="{!v.client.Client_Contact_Person_1_Surname__c}"
+                                            type="text" required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1AddLine1"
+                                            label="Relationship to Client"
+                                            value="{!v.client.Relationship_to_applicant__c}" type="text"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1Location"
+                                            label="Location (County/Country)"
+                                            value="{!v.client.Location_County_Country__c}" type="text"
+                                            required="true" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="space">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1MainPhone"
+                                            label="Phone (main)" value="{!v.client.Client_Contact_Person_1_Phone__c}"
+                                            type="tel" required="true" />
+                                    </lightning:layoutItem>
+                                    &nbsp;
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1AltPhone"
+                                            label="Phone (alternative)"
+                                            value="{!v.client.Client_Contact_Person_1_Alternate_Phone__c}" type="tel" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                                <lightning:layout horizontalAlign="spread">
+                                    <lightning:layoutItem size="6">
+                                        <lightning:input aura:id="clientRegistrationForm" name="cont1Email"
+                                            label="Email" value="{!v.client.Client_Contact_Person_1_Email__c}"
+                                            type="email" />
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </div>
+                        </div>
+                    </lightning:card>
+                    <br></br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br></br>
+    <div class="slds-grid slds-wrap" style="text-align: center;">
+        <div class="slds-col slds-size_8-of-12">
+            <span></span>
+        </div>
+        <div class="slds-col slds-size_3-of-12">
+            <span>
+                <lightning:button onclick="{!c.handleNextClick}" label="Next" variant="brand" />
+            </span>
+        </div>
+    </div>
+    <br></br>
+</aura:component>

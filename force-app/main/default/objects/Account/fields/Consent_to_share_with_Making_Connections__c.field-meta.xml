@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Consent_to_share_with_Making_Connections__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Has the client/NOK consented to information being shared with Making Connections?</description>
+    <externalId>false</externalId>
+    <label>Consent to share with Making Connections</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Checkbox</type>
+</CustomField>
